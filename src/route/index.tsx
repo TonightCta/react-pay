@@ -1,11 +1,14 @@
 
 import { ReactElement } from "react";
-import { Routes,Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import * as View from '../views/view';
 
-const RouterConfig = () : ReactElement => {
+const RouterConfig = (): ReactElement => {
     return (
         <Routes>
-            <Route path="/"></Route>
+            <Route path="/" element={<View.IndexView />}>
+                <Route index element={<View.OverviewIndex />}></Route>
+            </Route>
         </Routes>
     )
 };
