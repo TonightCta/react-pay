@@ -3,7 +3,7 @@
 import { Context, IAction, State,Type } from "../utils/interface";
 
 export const defaultState : State = {
-    test:0
+    test:Number(sessionStorage.getItem('test')) || 0,
 };
 
 export const defaultContext : Context = {

@@ -1,6 +1,6 @@
 import { HashRouter } from 'react-router-dom';
 import { useReducer, createContext, ReactElement, ReactNode } from 'react';
-import { Context, State } from './utils/interface';
+import { Context } from './utils/interface';
 import { defaultContext, defaultStateInit, initState } from './reducer';
 import './App.css';
 import RouterConfig from './route';
