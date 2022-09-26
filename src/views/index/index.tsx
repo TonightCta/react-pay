@@ -1,22 +1,27 @@
 
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import './index.scss';
-import { IBPay } from '../../App';
-import { useContext } from 'react';
+import Menu from './components/menu';
+import ViewTool from './components/view_tool';
+
 
 const IndexView = (): ReactElement<ReactNode> => {
-    const { state } = useContext(IBPay);
+    const [menuStatus, setMenuStatus] = useState<number>(1);
     return (
-        <div className='index-view'>
+        <div className={`index-view ${menuStatus === 0 ? 'hidden-view-menu' : ''}`}>
             <div className='left-menu'>
-                <div className='menu-inner'>
-                    左侧菜单
-                </div>
+                <Menu />
             </div>
             <div className='right-view'>
-                <Outlet />
-                {state.test}
+                <div className='view-tool-box'>
+                    <ViewTool updateMenu={(val:number) => {
+                        setMenuStatus(val)
+                    }}/>
+                </div>
+                <div className='view-box'>
+                    <Outlet />
+                </div>
             </div>
         </div>
     )

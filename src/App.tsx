@@ -2,9 +2,10 @@ import { HashRouter } from 'react-router-dom';
 import { useReducer, createContext, ReactElement, ReactNode } from 'react';
 import { Context } from './utils/interface';
 import { defaultContext, defaultStateInit, initState } from './reducer';
-import './App.css';
+import './App.scss';
 import RouterConfig from './route';
 import { defaultState } from './reducer/index';
+import 'antd/dist/antd.css';
 
 
 export const IBPay = createContext<Context>(defaultContext);
