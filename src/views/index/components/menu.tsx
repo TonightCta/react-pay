@@ -95,12 +95,6 @@ const Route: RouteMine[] = [
         ]
     }
 ]
-const content = (
-    <div>
-        <p>Content</p>
-        <p>Content</p>
-    </div>
-);
 const Menu = (): ReactElement<ReactNode> => {
     //选中效果
     const [active, setActive] = useState<{ levelOne: number, levelTwo: number }>({
@@ -219,7 +213,10 @@ const Menu = (): ReactElement<ReactNode> => {
                     <li>
                         <p>修改交易密码</p>
                     </li>
-                    <li>
+                    <li onClick={() => {
+                        sessionStorage.clear();
+                        navigate('/login')
+                    }}>
                         <p>
                             <span className='iconfont icon-tuichu'></span>
                             退出

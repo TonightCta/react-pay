@@ -5,7 +5,11 @@ import { defaultContext, defaultStateInit, initState } from './reducer';
 import './App.scss';
 import RouterConfig from './route';
 import { defaultState } from './reducer/index';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
+import 'element-theme-default';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
 
 
 export const IBPay = createContext<Context>(defaultContext);

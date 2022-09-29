@@ -1,0 +1,495 @@
+.overview-index {
+  .admin-view {
+    ul {
+      display: flex;
+      justify-content: space-between;
+      li {
+        width: 24.1%;
+        height: 124px;
+        padding: 0 22px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        .icon-box {
+          width: 72px;
+          height: 72px;
+          border-radius: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          p {
+            font-size: 68px;
+          }
+        }
+        .card-msg {
+          margin-left: 16px;
+          text-align: left;
+          p {
+            color: #666;
+          }
+          p:first-child {
+            font-size: 16px;
+          }
+          p:last-child {
+            font-size: 32px;
+            font-weight: 500;
+            margin-top: 8px;
+          }
+        }
+        .more-detail {
+          position: absolute;
+          bottom: 16px;
+          right: 16px;
+          .more-inner {
+            display: flex;
+            cursor: pointer;
+            p {
+              font-size: 14px;
+              color: #999;
+            }
+            p:last-child {
+              width: 14px;
+              height: 14px;
+              background-color: rgba(0, 0, 0, 0.08);
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-left: 4px;
+              .iconfont {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .flex-left-1 {
+    display: flex;
+    margin-top: 24px;
+    .left-box {
+      width: 550px;
+      margin-right: 24px;
+      .account-log {
+        padding: 14px;
+        border-radius: 8px;
+        border: 1px solid #e5dfff;
+        .account-card {
+          padding: 16px;
+          background: linear-gradient(138deg, #7c61ff 0%, #5a38fc 100%);
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          position: relative;
+          .bg-shadow {
+            width: 100%;
+            height: 96px;
+            position: absolute;
+            left: 0;
+            top: 5px;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .avatar-box {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            border-radius: 50%;
+            border: 1px solid white;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-right: 8px;
+            position: relative;
+            z-index: 2;
+            img {
+              height: 100%;
+            }
+          }
+          .account-name {
+            font-size: 18px;
+            color: white;
+            font-weight: 500;
+          }
+          .name-msg {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+            .view-other-account {
+              width: 16px;
+              height: 16px;
+              border: 1px solid white;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: white;
+              border-radius: 3px;
+              cursor: pointer;
+            }
+          }
+        }
+        .bind-msg {
+          margin-top: 26px;
+          display: flex;
+          align-items: center;
+          button {
+            height: 42px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+          }
+          .auth-btn {
+            width: 120px;
+            border: 1px solid #d82323;
+            height: 42px;
+            border-radius: 4px;
+            color: #d82323;
+            background-color: #fff2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .oper-btn {
+            width: 160px;
+            background-color: rgba(93, 59, 252, 0.04);
+            color: #5c3bfc;
+            border: 1px solid rgba(104, 50, 255, 0.24);
+            margin-right: 12px;
+          }
+          .oper-box-btn {
+            display: flex;
+            flex: 1;
+            button {
+              flex: 1;
+            }
+            button:last-child {
+              margin-right: 0;
+            }
+          }
+          .mask-line {
+            width: 1px;
+            height: 28px;
+            background-color: #eee;
+            margin: 0 18px;
+          }
+        }
+        .account-card-msg {
+          padding: 16px 10px;
+          border-radius: 4px;
+          border: 1px solid rgba(151, 151, 151, 0.2);
+          margin-top: 16px;
+          ul {
+            li {
+              display: flex;
+              margin-bottom: 14px;
+              align-items: center;
+              p:first-child {
+                font-size: 12px;
+                color: #999;
+                width: 80px;
+                margin-right: 24px;
+                text-align-last: justify;
+                // transform: translateY(1px);
+              }
+              p:last-child {
+                font-size: 14px;
+                color: #666;
+              }
+            }
+            li:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+        .balance-card {
+          margin-top: 16px;
+          ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            li {
+              padding: 24px 10px;
+              border-radius: 8px;
+              width: calc(50% - 4px);
+              margin-bottom: 10px;
+              position: relative;
+              display: flex;
+              .card-icon {
+                width: 46px;
+                height: 46px;
+                margin-right: 16px;
+                img {
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+              .card-msg {
+                flex: 1;
+                text-align: left;
+                .card-name {
+                  display: flex;
+                  p {
+                    font-size: 12px;
+                    color: rgba(102, 102, 102, 0.6);
+                  }
+                  .iconfont {
+                    font-size: 12px;
+                    color: rgba(102, 102, 102, 0.6);
+                    margin-left: 4px;
+                    cursor: pointer;
+                  }
+                }
+                .balance-count {
+                  font-size: 24px;
+                  color: #333;
+                  font-weight: 500;
+                  margin: 3px 0;
+                }
+                .balance-detail {
+                  display: flex;
+                  margin-top: 4px;
+                  cursor: pointer;
+                  p {
+                    font-size: 12px;
+                    color: #666;
+                  }
+                  img {
+                    width: 12px;
+                    height: 12px;
+                    margin-left: 4px;
+                  }
+                }
+              }
+
+              .oper-btn {
+                width: 66px;
+                height: 30px;
+                background: url("../../assets/images/balance_btn.png");
+                background-size: 100% 100%;
+                font-size: 12px;
+                color: white;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 1px 0 0 5px;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+        .login-log {
+          margin-top: 36px;
+          .log-list {
+            margin-top: 24px;
+          }
+        }
+      }
+    }
+    .right-box {
+      flex: 1;
+      .bill-charts {
+        padding: 20px 18px;
+        border-radius: 8px;
+        border: 1px solid #e5dfff;
+        .charts-box{
+          width: 100%;
+          height: 400px;
+          margin-top: 26px;
+        }
+      }
+      .settlement-list {
+        padding: 20px;
+        border: 1px solid #e5dfff;
+        border-radius: 8px;
+        margin-top: 24px;
+        .list-date{
+          margin-top: 20px;
+          .liquire-hash{
+            font-size: 12px;
+            color: #6747FD;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+.ant-popover-inner {
+  border-radius: 4px !important;
+}
+.ant-popover-inner-content {
+  padding: 0 !important;
+  .select-merchant {
+    ul {
+      li {
+        padding: 14px 12px;
+        cursor: pointer;
+        transition: 0.3s all;
+      }
+      li:hover {
+        color: #7c61ff;
+        background: #f8f8f8;
+      }
+    }
+  }
+  .more-content {
+    display: flex;
+    .inner-title {
+      border-bottom: 1px solid #f9f7ff;
+      padding: 8px 18px;
+      font-size: 16px;
+      color: #333;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    ul {
+      li {
+        display: flex;
+        padding: 8px 18px;
+        p {
+          font-size: 14px;
+          color: #666;
+        }
+        p:last-child {
+          margin-left: 38px;
+          color: #999;
+        }
+      }
+    }
+  }
+  .balance-detail-popover {
+    ul {
+      li {
+        min-width: 180px;
+        .coin-name {
+          padding: 8px 12px;
+          font-size: 16px;
+          color: #333;
+          font-weight: 500;
+          background-color: #fbfbff;
+        }
+        .count-link {
+          padding: 10px 12px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          p {
+            font-size: 14px;
+            color: #333;
+          }
+          .liquire-text {
+            font-size: 14px;
+            color: #3850ff;
+            cursor: pointer;
+            margin-left: 24px;
+            font-weight: 500;
+            .iconfont {
+              font-size: 12px;
+              font-weight: 400;
+              display: inline-block;
+              transform: scale(0.8);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.public-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+  }
+  .right-oper {
+    display: flex;
+  }
+  .select-coin {
+    margin-left: 12px;
+  }
+  .select-date{
+    margin-left: 12px;
+  }
+  .down-echarts{
+    width: 42px;
+    height: 31px;
+    border: 1px solid rgba(91, 57, 252, .3);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    cursor: pointer;
+    .iconfont{
+      font-size: 17px;
+      color: #5B39FC;
+    }
+  }
+  .ant-select {
+    .ant-select-selector {
+      border-radius: 14px !important;
+      height: 31px !important;
+      border-color: rgba(91, 57, 252, 0.3) !important;
+      .ant-select-selection-item {
+        color: #5f3efc;
+        font-size: 12px!important;
+      }
+      .ant-select-selection-placeholder{
+        font-size: 12px!important;
+        color: #c1b3ff;
+      }
+    }
+    .ant-select-arrow {
+      color: #5f3efc;
+      span{
+        font-size: 24px;
+      }
+    }
+  }
+  .ant-picker {
+    border-radius: 14px;
+    border-color: rgba(91, 57, 252, 0.3);
+    .ant-picker-input {
+      input {
+        color: #5f3efc;
+        max-width: 74px;
+        font-size: 12px;
+        transform: translateY(1px);
+      }
+      input::placeholder {
+        color: #c1b3ff;
+      }
+    }
+    .ant-picker-active-bar {
+      background-color: rgba(91, 57, 252, 0.3);
+    }
+    .ant-picker-suffix {
+      img {
+        width: 21px;
+        height: 21px;
+      }
+    }
+    .ant-picker-clear {
+      position: relative;
+      top: auto;
+      right: auto;
+      margin-left: 4px;
+      opacity: 1;
+      transform: translateY(1px);
+    }
+  }
+}

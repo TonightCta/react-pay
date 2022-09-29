@@ -1,0 +1,163 @@
+.login-index {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  padding-left: 160px;
+  padding-top: 95px;
+  user-select: none;
+  .top-right-color {
+    position: absolute;
+    width: 580px;
+    height: 402px;
+    background: url("../../assets/images/login_1.png");
+    background-size: 100% 100%;
+    top: 0;
+    right: 0;
+  }
+  .bottom-right-color {
+    position: absolute;
+    width: 992px;
+    height: 755px;
+    background: url("../../assets/images/login_2.png");
+    background-size: 100% 100%;
+    bottom: 0;
+    right: 0;
+  }
+  .bottom-left-color {
+    position: absolute;
+    width: 265px;
+    height: 388px;
+    background: url("../../assets/images/login_3.png");
+    background-size: 100% 100%;
+    left: 0;
+    bottom: 0;
+  }
+  .login-box {
+    text-align: left;
+    img {
+      width: 200px;
+      height: 52px;
+    }
+    .oper-box-parent {
+      display: flex;
+      width: 412px;
+      overflow: hidden;
+      .login-inner-box {
+        transition: 0.3s all;
+      }
+      .forget-inner-box {
+        opacity: 0;
+        .login-text{
+          width: 146px;
+          height: 35px;
+        }
+        .oper-box {
+          display: flex;
+          .default-btn {
+            width: 140px;
+            background: white;
+            border: 1px solid #979797;
+            color: #333;
+            margin-right: 22px;
+          }
+          button:last-child{
+            flex: 1;
+          }
+        }
+      }
+    }
+    .show-forget {
+      .login-inner-box {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      .forget-inner-box {
+        transition: 0.3s all;
+        transform: translateX(-100%);
+        opacity: 1;
+      }
+    }
+    .login-text {
+      width: 72px;
+      height: 35px;
+      margin-top: 24px;
+    }
+    .welcome-text {
+      font-size: 16px;
+      color: #666;
+      margin-top: 6px;
+    }
+    .inp-msg {
+      margin-top: 34px;
+      .inp-box {
+        margin-bottom: 20px;
+        .inp-label {
+          font-size: 16px;
+          color: #333;
+          margin-bottom: 6px !important;
+        }
+        .inner-box {
+          height: 56px;
+          width: 412px;
+          display: flex;
+          align-items: center;
+          border-radius: 28px;
+          border: 1px solid #ccc;
+          padding: 0 20px;
+          .iconfont {
+            font-size: 20px;
+            color: #666;
+            margin-right: 16px;
+          }
+          .oper-icon {
+            font-size: 18px;
+            color: #999;
+            cursor: pointer;
+          }
+          input {
+            flex: 1;
+          }
+        }
+        .send-code{
+          font-size: 16px;
+          font-weight: 500;
+          color: #6140FC;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+        }
+        .send-code::before{
+          content: '';
+          height: 24px;
+          width: 1px;
+          display: inline-block;
+          background-color: #ccc;
+          margin-right: 16px;
+        }
+      }
+      .oper-box {
+        margin-top: 60px;
+        width: 412px;
+        button {
+          height: 56px;
+          border-radius: 28px;
+          background: linear-gradient(138deg, #7c61ff 0%, #5a38fc 100%);
+          font-size: 16px;
+          color: white;
+        }
+      }
+      .forget-pass {
+        margin-top: 24px;
+        font-size: 14px;
+        color: #999;
+        text-align: center;
+        width: 412px;
+        span {
+          font-weight: 500;
+          color: #5d3cfc;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

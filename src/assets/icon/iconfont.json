@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "32073496",
+      "name": "H5 shaixuan",
+      "font_class": "a-H5shaixuan",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "32072765",
+      "name": "H5rili",
+      "font_class": "H5rili",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "257405",
+      "name": "close_fill",
+      "font_class": "closefill",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    },
+    {
       "icon_id": "32019003",
       "name": "DOGE",
       "font_class": "DOGE",

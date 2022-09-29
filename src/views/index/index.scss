@@ -17,10 +17,11 @@
       box-sizing: border-box;
       display: flex;
       // background: linear-gradient(180deg, #8166ff 0%, #937dff 100%);
-      border-top-right-radius: 16px;
-      border-bottom-right-radius: 16px;
+      border-top-right-radius: 18px;
+      border-bottom-right-radius: 18px;
       .level-one-menu {
         width: 60px;
+        min-width: 60px;
         height: 100%;
         background-color: #6045e2;
         border-top-right-radius: 16px;
@@ -139,9 +140,11 @@
   }
   .right-view {
     padding: 18px 24px;
+    min-width: 1755px;
     flex: 1;
     box-sizing: border-box;
     display: flex;
+    overflow: auto;
     flex-direction: column;
     .view-tool-box{
       margin-bottom: 20px;
@@ -191,7 +194,7 @@
 }
 .hidden-view-menu{
   .left-menu{
-    width: 0;
+    width: 60px;
     overflow: hidden;
   }
 }
@@ -203,14 +206,13 @@
     }
   }
   .ant-popover-inner{
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(255,255,255,.15);
+    backdrop-filter: saturate(90%) blur(10px);
+    border-radius: 4px;
+    overflow: hidden;
     .ant-popover-inner-content{
       padding: 0;
       .popver-content{
-        background-color: rgba(255,255,255,.15);
-        backdrop-filter: saturate(90%) blur(10px);
-        border-radius: 4px;
-        overflow: hidden;
         ul{
           li{
             padding: 12px 30px;
