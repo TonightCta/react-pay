@@ -197,7 +197,7 @@ const Menu = (): ReactElement<ReactNode> => {
         };
         setTimeout(() => {
             setDetaultTop();
-        })
+        },100)
     }, [location]);
     //工具栏路由信息
     const [toolRoute, setToolRoute] = useState<string>('首页');

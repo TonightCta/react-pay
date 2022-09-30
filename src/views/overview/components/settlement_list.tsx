@@ -4,7 +4,6 @@ import { ReactElement } from 'react';
 import zhCN from 'antd/es/locale/zh_CN';
 import type { ColumnsType } from 'antd/es/table';
 
-const { Column } = Table;
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
@@ -50,7 +49,7 @@ const dataSource = [
         hash: 'https://www.baidu.com'
     },
     {
-        key: '2',
+        key: '3',
         merhcant_name: '章鱼哥',
         before_balance: 9.8000000,
         coin: 'USDT-TRC20',
@@ -177,13 +176,7 @@ const SettlementList = (): ReactElement => {
                 </div>
             </div>
             <div className='list-date'>
-                <Table dataSource={dataSource} columns={columns} >
-                    {/* <Column title="交易哈希" dataIndex="hash" key="hash" render={(hash:string) : ReactElement => (
-                        <p>
-                            查看
-                        </p>
-                    )}/> */}
-                </Table>
+                <Table dataSource={dataSource} columns={columns} />
             </div>
         </div>
     )

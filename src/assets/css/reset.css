@@ -167,14 +167,20 @@ input::-webkit-inner-spin-button {
 .echarts-tooltip {
     background-color: red;
 }
-.ant-table-content table{
-    border-top-left-radius: 4px!important;
-    border-top-right-radius: 4px!important;
+
+.ant-table-content table {
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
     overflow: hidden;
 }
-.text-overflow{
+
+.text-overflow {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 100px;
+}
+
+th::before{
+    width: 0!important;
 }

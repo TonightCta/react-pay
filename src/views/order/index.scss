@@ -1,0 +1,48 @@
+.order-index {
+  .table-list {
+    margin-top: 24px;
+    padding: 24px 20px;
+    border-radius: 4px;
+    border: 1px solid #e5dfff;
+    .text-overflow {
+      width: auto;
+    }
+    .liquire-hash {
+      font-size: 12px;
+      color: #6747fd;
+      cursor: pointer;
+    }
+    .order-status {
+      padding: 2px 10px;
+      border-radius: 4px;
+      display: table;
+      margin: 0 auto;
+    }
+    .font-14{
+      font-size: 14px;
+    }
+    .success-order {
+      background: rgba(36, 255, 0, 0.1);
+      color: #019e00;
+    }
+    .failed-order{
+      background-color: #f8f8f8;
+      color: #666;
+    }
+    .table-row-mine {
+      font-size: 12px;
+    }
+  }
+  .page-oper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+    .ant-pagination-item-active {
+      background-color: #694afd;
+      a {
+        color: white;
+      }
+    }
+  }
+}
