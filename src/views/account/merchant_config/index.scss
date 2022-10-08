@@ -1,0 +1,65 @@
+.merchant-config {
+  .fitler-box {
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #efecff;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .filter-inner {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      .inner-label {
+        margin-right: 6px;
+        font-size: 14px;
+        color: #000;
+      }
+      .ant-select {
+        .ant-select-selector {
+          border-color: #efecff;
+        }
+      }
+    }
+    .filter-btn {
+      button {
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .liquire-btn {
+        width: 84px;
+        height: 32px;
+      }
+      .primary-2 {
+        background-color: white;
+        border: 1px solid #694afd;
+        font-weight: 500;
+        color: #694afd;
+        margin-left: 26px;
+        padding: 4px 20px;
+      }
+    }
+  }
+  .data-list {
+    padding: 24px 20px;
+    border-radius: 4px;
+    border: 1px solid #e5dfff;
+    .list-oper {
+      color: #694afd;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .page-oper {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 40px;
+      .ant-pagination-item-active {
+        background-color: #694afd;
+        a {
+          color: white;
+        }
+      }
+    }
+  }
+}

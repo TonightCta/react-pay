@@ -1,0 +1,157 @@
+.merchant-list {
+  .fitler-box {
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #efecff;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .filter-inner {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      .inner-label {
+        margin-right: 6px;
+        font-size: 14px;
+        color: #000;
+      }
+      .ant-select {
+        .ant-select-selector {
+          border-color: #efecff;
+        }
+      }
+    }
+    .filter-btn {
+      button {
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .liquire-btn {
+        width: 84px;
+        height: 32px;
+      }
+      .primary-2 {
+        background-color: white;
+        border: 1px solid #694afd;
+        font-weight: 500;
+        color: #694afd;
+        margin-left: 26px;
+        padding: 4px 20px;
+      }
+    }
+  }
+  .data-list {
+    padding: 24px 20px;
+    border-radius: 4px;
+    border: 1px solid #e5dfff;
+    .ant-table-cell {
+      line-height: 30px;
+    }
+    .address-status {
+      font-weight: 500;
+    }
+    .normal-account {
+      color: #26ba6e;
+    }
+    .freez-account {
+      color: #ff767f;
+    }
+    .account-status-oper {
+      width: 46px;
+      height: 26px;
+      background-color: #f2ecff;
+      border-radius: 14px;
+      margin: 0 auto;
+      transform: translateY(-2px);
+      cursor: pointer;
+      padding: 2px;
+      .status-switch {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s all;
+      }
+    }
+    .open-switch {
+      .status-switch {
+        background-color: #5ecf95;
+        transform: translateX(90%);
+        .switch-mask {
+          width: 2px;
+          height: 7px;
+          border-radius: 1px;
+          background-color: white;
+        }
+      }
+    }
+    .close-switch {
+      .status-switch {
+        transform: translateX(0);
+        background-color: #ff767f;
+        .switch-mask {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          border: 2px solid white;
+        }
+      }
+    }
+    .list-oper {
+      display: flex;
+      justify-content: center;
+      button {
+        width: 46px;
+        height: 26px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+      }
+      .edit-merchant {
+        width: 40px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 13px;
+        background-color: rgba(105, 74, 253, 0.07);
+        border-radius: 4px;
+        cursor: pointer;
+        .iconfont {
+          font-size: 14px;
+          color: #694afd;
+        }
+      }
+      .delete-merchant {
+        width: 40px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        border: 1px solid rgba(105, 74, 253, 0.07);
+        cursor: pointer;
+        .iconfont {
+          font-size: 14px;
+          color: #694afd;
+        }
+      }
+    }
+    .page-oper {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 40px;
+      .ant-pagination-item-active {
+        background-color: #694afd;
+        a {
+          color: white;
+        }
+      }
+    }
+  }
+}
