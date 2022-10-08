@@ -1,0 +1,48 @@
+.addresses-list {
+  .filter-box {
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #e5dfff;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    .filter-inner {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      margin-right: 42px;
+      input {
+        width: 166px;
+        border-radius: 4px;
+        border-color: #efecff;
+      }
+      .filter-label {
+        white-space: nowrap;
+        margin-right: 6px;
+        font-size: 14px;
+        color: #000;
+      }
+      .ant-select {
+        .ant-select-selector {
+          border-radius: 4px;
+          border-color: #efecff;
+        }
+      }
+    }
+    .filter-btn {
+      flex: 1;
+      text-align: left;
+      button {
+        width: 84px;
+        height: 32px;
+        font-size: 14px;
+        border-radius: 4px;
+      }
+    }
+  }
+  .data-list {
+    padding: 24px 20px;
+    border-radius: 4px;
+    border: 1px solid #e5dfff;
+  }
+}

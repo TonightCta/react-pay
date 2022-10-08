@@ -1,0 +1,191 @@
+.merchan-deposit {
+  .assets-oper-remark {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff0f0;
+    border-radius: 4px;
+    border: 1px solid #ffabae;
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    .iconfont {
+      font-size: 14px;
+      margin-right: 4px;
+    }
+    p {
+      font-size: 12px;
+      color: #e17474;
+    }
+  }
+  .deposit-content {
+    padding: 32px 24px;
+    border-radius: 4px;
+    border: 1px solid #e5dfff;
+    .select-coin {
+      display: flex;
+      align-items: center;
+      margin-bottom: 36px;
+      .select-label {
+        font-size: 18px;
+        color: #333;
+        font-weight: 500;
+        margin-right: 98px;
+      }
+      ul {
+        flex: 1;
+        display: flex;
+        li {
+          padding: 14px 28px;
+          border-radius: 4px;
+          border: 1px solid #cccccc;
+          margin-right: 30px;
+          cursor: pointer;
+          transition: 0.2s all;
+          min-width: 160px;
+          font-weight: 500;
+          position: relative;
+          .active-label {
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            width: 0px;
+            height: 0px;
+            border: 8px solid rgba(0, 0, 0, 0);
+            border-top-color: #6b4cfd;
+            transform: rotate(-45deg);
+            opacity: 0;
+            transition: 0.1s all;
+          }
+        }
+        .active-coin {
+          border-color: #6b4cfd;
+          color: #7153fe;
+          .active-label {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .public-account {
+      padding: 20px 18px;
+      border-radius: 8px;
+      background-color: rgba(216, 216, 216, 0.12);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      .account-remark {
+        margin-right: 46px;
+        .remark-title {
+          font-size: 18px;
+          color: #333;
+          font-weight: 500;
+          text-align: left;
+          .iconfont {
+            font-size: 18px;
+            margin-left: 8px;
+            cursor: pointer;
+            color: #999;
+          }
+        }
+        .remark-text {
+          max-width: 180px;
+          font-size: 12px;
+          color: #999;
+          text-align: left;
+          margin-top: 4px;
+          line-height: 20px;
+          span {
+            color: #ec5555;
+            font-weight: 500;
+            margin: 0 4px;
+          }
+        }
+      }
+      .address-qr {
+        width: 152px;
+        height: 152px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .address-msg {
+        margin-left: 34px;
+        .msg-public {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .msg-title {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+            margin-right: 32px;
+          }
+          .text {
+            font-size: 18px;
+            color: #999;
+            margin-right: 18px;
+          }
+          button {
+            height: 25px;
+            font-size: 14px;
+            border-radius: 4px;
+          }
+        }
+        .fee-amount {
+          margin-bottom: 26px;
+          padding-right: 66px;
+          p:last-child {
+            font-size: 16px;
+            font-weight: 500;
+            color: #ec5555;
+          }
+        }
+      }
+    }
+    .coin-market-outside {
+      display: flex;
+      align-items: center;
+      .market-remark {
+        text-align: left;
+        margin-right: 54px;
+        p:first-child {
+          font-size: 18px;
+          font-weight: 500;
+          color: #333;
+        }
+        p:last-child {
+          font-size: 12px;
+          color: #999;
+          line-height: 20px;
+          margin-top: 4px;
+        }
+      }
+      ul {
+        display: flex;
+        li {
+          width: 230px;
+          height: 60px;
+          cursor: pointer;
+          border-radius: 4px;
+          border: 1px solid #e2e2e2;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 36px;
+        }
+        li:first-child {
+          img {
+            height: 24px;
+          }
+        }
+        li:last-child {
+          img {
+            height: 28px;
+          }
+        }
+      }
+    }
+  }
+}

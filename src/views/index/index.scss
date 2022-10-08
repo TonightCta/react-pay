@@ -88,6 +88,7 @@
       .level-two-menu {
         flex: 1;
         position: relative;
+        overflow: hidden;
         img {
           height: 44px;
           margin-top: 10px;
@@ -122,6 +123,7 @@
               font-size: 14px;
               font-weight: 500;
               color: white;
+              white-space: nowrap;
             }
           }
           .active-menu-two {
