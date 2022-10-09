@@ -1,11 +1,15 @@
 
 import { Button, Popover } from 'antd';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import BalanceCard from './balance_card';
 import LoginLog from './login_log';
+import SettlementBox from './settlement_box';
 
 const AccountLog = (): ReactElement => {
-    const merchant: string[] = ['s9756382730@outlook.com', 's9756382730@outlook.com', 's9756382730@outlook.com']
+    const merchant: string[] = ['s9756382730@outlook.com', 's9756382730@outlook.com', 's9756382730@outlook.com'];
+
+    const [visible, setVisible] = useState<boolean>(false);
+    const [boxType,setBoxType] = useState<number>(1);
     const SelectMerchant = (): ReactElement => {
         return (
             <div className='select-merchant'>
@@ -47,8 +51,14 @@ const AccountLog = (): ReactElement => {
                 </div>
                 <p className='mask-line'></p>
                 <div className='oper-box-btn'>
-                    <Button type="default" className='oper-btn'>利润结算</Button>
-                    <Button type="default" className='oper-btn'>提取余额</Button>
+                    <Button type="default" className='oper-btn' onClick={() => {
+                        setBoxType(1)
+                        setVisible(true)
+                    }}>利润结算</Button>
+                    <Button type="default" className='oper-btn' onClick={() => {
+                        setBoxType(2)
+                        setVisible(true)
+                    }}>提取余额</Button>
                 </div>
             </div>
             {/* 账户信息 */}
@@ -69,9 +79,13 @@ const AccountLog = (): ReactElement => {
                 </ul>
             </div>
             {/* 余额信息 */}
-            <BalanceCard/>
+            <BalanceCard />
             {/* 登录日志 */}
-            <LoginLog/>
+            <LoginLog />
+            {/* 利润结算 */}
+            <SettlementBox value={visible} type={boxType} resetModal={(val: boolean): void => {
+                setVisible(false)
+            }} />
         </div>
     )
 };

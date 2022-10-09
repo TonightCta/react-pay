@@ -155,13 +155,13 @@
         color: #333;
         font-weight: 500;
         text-align: left;
-        span{
-            font-size: 14px;
-            color: #4266FF;
-            font-weight: 500;
-            margin-left: 8px;
-            display: inline-block;
-            transform: translateY(-2px);
+        span {
+          font-size: 14px;
+          color: #4266ff;
+          font-weight: 500;
+          margin-left: 8px;
+          display: inline-block;
+          transform: translateY(-2px);
         }
       }
       ul {
@@ -191,7 +191,7 @@
           padding: 20px 0;
           font-size: 14px;
           color: #999;
-          button{
+          button {
             margin-top: 12px;
             font-size: 12px;
             border-radius: 4px;
@@ -199,5 +199,92 @@
         }
       }
     }
+  }
+}
+.get-key-inner {
+  padding: 32px 20px 40px;
+  .inp-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    .inner-label {
+      width: 72px;
+    }
+    input {
+      flex: 1;
+      height: 44px;
+      border-radius: 4px;
+      background-color: #faf8ff;
+      border-color: rgba(104, 72, 253, 0.2);
+    }
+    .ant-input-disabled {
+      background-color: #f8f8f8;
+      border-color: #eee;
+      color: #333;
+    }
+  }
+  .inp-box:last-child {
+    margin-bottom: 0;
+  }
+}
+.get-key-result {
+  .modal-header-mine {
+    border: 0;
+  }
+  .key-result-inner {
+    text-align: center;
+    padding-bottom: 28px;
+    img {
+      width: 130px;
+      height: 130px;
+      margin-top: -115px;
+    }
+    .success-text {
+      font-size: 24px;
+      color: #00b26e;
+      font-weight: 500;
+    }
+    .success-remark {
+      font-size: 14px;
+      color: #999;
+      margin-top: 6px;
+    }
+    .result-text {
+      padding: 14px 26px;
+      background-color: rgba(244, 238, 252, 0.36);
+      font-size: 20px;
+      font-weight: 500;
+      color: #7d51d2;
+      display: table;
+      margin: 0 auto;
+      margin-top: 6px;
+    }
+    .oper-btn {
+      margin-top: 10px;
+      button {
+        border-radius: 4px;
+        font-size: 12px;
+        .iconfont {
+          font-size: 12px;
+          margin-right: 4px;
+        }
+      }
+    }
+  }
+}
+.set-white-inner {
+  padding: 28px 30px 40px;
+  .inp-box {
+    margin-bottom: 26px;
+    input {
+      margin-top: 10px;
+      height: 44px;
+      background-color: #faf8ff;
+      border-radius: 4px;
+      border-color: rgba(104, 72, 253, 0.2);
+    }
+  }
+  .inp-box:last-child{
+    margin-bottom: 0;
   }
 }

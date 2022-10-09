@@ -1,9 +1,15 @@
 
 import { Button } from 'antd';
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
+import GetKey from './get_key';
+import SetWhite from './set_white';
 
 
 const CompanyMsg = (): ReactElement<ReactNode> => {
+    const [boxModal,setBoxModal] = useState<{key:boolean,white:boolean}>({
+        key:false,
+        white:false
+    })
     return (
         <div className='company-msg'>
             <div className='msg-public merchant-msg'>
@@ -48,13 +54,23 @@ const CompanyMsg = (): ReactElement<ReactNode> => {
                     <li>
                         <p>-</p>
                         <p>
-                            <Button type='primary' size='small'>点击获取</Button>
+                            <Button type='primary' size='small' onClick={() => {
+                                setBoxModal({
+                                    ...boxModal,
+                                    key:true
+                                })
+                            }}>点击获取</Button>
                         </p>
                     </li>
                     <li>
                         <p>-</p>
                         <p>
-                            <Button type='primary' size='small'>设置</Button>
+                            <Button type='primary' size='small' onClick={() => {
+                                setBoxModal({
+                                    ...boxModal,
+                                    white:true
+                                })
+                            }}>设置</Button>
                         </p>
                     </li>
                 </ul>
@@ -78,6 +94,20 @@ const CompanyMsg = (): ReactElement<ReactNode> => {
                     <li>-</li>
                 </ul>
             </div>
+            {/* 获取API KEY */}
+            <GetKey value={boxModal.key} resetModal={(val:boolean) : void => {
+                setBoxModal({
+                    ...boxModal,
+                    key:val
+                })
+            }}/>
+            {/* 设置白名单地址 */}
+            <SetWhite value={boxModal.white} resetModal={(val:boolean) : void => {
+                setBoxModal({
+                    ...boxModal,
+                    white:val
+                })
+            }}/>
         </div>
     )
 };

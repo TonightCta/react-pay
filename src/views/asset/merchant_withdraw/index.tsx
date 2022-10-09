@@ -1,12 +1,23 @@
 
 import { Button, Input } from 'antd';
 import { ReactElement, ReactNode, useState } from 'react';
+import FaileFee from './components/faile_fee';
+import WithDrawBox from './components/withdraw_box';
 import './index.scss'
 
 const coin: string[] = ['TRX', 'USDT-TRC20']
 
 const MerchantWithdraw = (): ReactElement<ReactNode> => {
     const [activeCoin, setActiveCoin] = useState<string>('TRX');
+
+    const [withDrawBox,setWithdrawBox] = useState<{
+        withdraw:boolean,
+        fee:boolean
+    }>({
+        withdraw:false,
+        fee:false
+    });
+
     return (
         <div className='merchant-withdraw'>
             <div className='assets-oper-remark'>
@@ -93,10 +104,29 @@ const MerchantWithdraw = (): ReactElement<ReactNode> => {
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                     <div className='inp-address'>
-                        <Button type='primary'>下一步</Button>
+                        <Button type='primary' onClick={() => {
+                            setWithdrawBox({
+                                ...withDrawBox,
+                                withdraw:true
+                            })
+                        }}>下一步</Button>
                     </div>
                 </div>
             </div>
+            {/* 矿工费不足 */}
+            <FaileFee value={withDrawBox.fee} resetModal={(val:boolean) : void => {
+                setWithdrawBox({
+                    ...withDrawBox,
+                    fee:val
+                })
+            }}/>
+            {/* 提币 */}
+            <WithDrawBox value={withDrawBox.withdraw} resetModal={(val:boolean) : void => {
+                setWithdrawBox({
+                    ...withDrawBox,
+                    withdraw:val
+                });
+            }}/>
         </div>
     )
 };

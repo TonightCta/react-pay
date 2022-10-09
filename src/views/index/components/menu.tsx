@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Popover } from 'antd'
 import { IBPay } from '../../../App';
 import { Type } from '../../../utils/interface';
+import EditPassword from './edit_password';
+import LoginOut from './login_out';
 
 interface RouteInnder {
     name: string,
@@ -101,6 +103,10 @@ const Menu = (): ReactElement<ReactNode> => {
         levelOne: 0,
         levelTwo: 0
     });
+    const [editPassBox, setEditPassBox] = useState<{ visible: boolean, type: number }>({
+        visible: false,
+        type: 1
+    });
     //二级菜单
     const [levelTwoMenu, setLevelTwoMenu] = useState<RouteInnder[]>(Route[0].children)
     const navigate = useNavigate();
@@ -197,8 +203,10 @@ const Menu = (): ReactElement<ReactNode> => {
         };
         setTimeout(() => {
             setDetaultTop();
-        },100)
+        }, 100)
     }, [location]);
+
+    const [visible,setVisible] = useState<boolean>(false);
     //工具栏路由信息
     const [toolRoute, setToolRoute] = useState<string>('首页');
     const { dispatch } = useContext(IBPay);
@@ -207,15 +215,24 @@ const Menu = (): ReactElement<ReactNode> => {
         return (
             <div className='popver-content'>
                 <ul>
-                    <li>
+                    <li onClick={() => {
+                        setEditPassBox({
+                            visible: true,
+                            type: 1
+                        })
+                    }}>
                         <p>修改登录密码</p>
                     </li>
-                    <li>
+                    <li onClick={() => {
+                        setEditPassBox({
+                            visible: true,
+                            type: 2
+                        })
+                    }}>
                         <p>修改交易密码</p>
                     </li>
                     <li onClick={() => {
-                        sessionStorage.clear();
-                        navigate('/login')
+                        setVisible(true)
                     }}>
                         <p>
                             <span className='iconfont icon-tuichu'></span>
@@ -310,6 +327,17 @@ const Menu = (): ReactElement<ReactNode> => {
                     }
                 </ul>
             </div>
+            {/* 编辑密码 */}
+            <EditPassword value={editPassBox.visible} type={editPassBox.type} resetClose={(val:boolean) : void => {
+                setEditPassBox({
+                    ...editPassBox,
+                    visible:val
+                })
+            }}/>
+            {/* 退出登录 */}
+            <LoginOut value={visible} resetModal={(val:boolean) => {
+                setVisible(val)
+            }}/>
         </div>
     )
 };
