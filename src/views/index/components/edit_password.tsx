@@ -1,6 +1,7 @@
 
 import { Button, Input, Modal } from 'antd';
 import { ReactElement, ReactNode, useState, useEffect, useRef, useCallback } from 'react';
+import { useCountdown } from '../../../utils/hooks';
 
 interface Props {
     value: boolean,
@@ -10,9 +11,7 @@ interface Props {
 
 const EditPassword = (props: Props): ReactElement<ReactNode> => {
     const [visible, setVisible] = useState<boolean>(false);
-    const [count, setCount] = useState<number>(60);
-    const cbSaver : any = useRef();
-    const timer = useRef<NodeJS.Timer>();
+    const { count, startTimer } = useCountdown(60);
     useEffect(() => {
         setVisible(props.value)
     },[props.value])
@@ -24,21 +23,6 @@ const EditPassword = (props: Props): ReactElement<ReactNode> => {
         new:'password',
         repeat:'password'
     });
-    cbSaver.current = () => {
-        setCount(count - 1);
-    };
-    const countDown = useCallback((): void => {
-        timer.current = setInterval(() => {
-            cbSaver.current();
-        }, 1000);
-    }, []);
-
-    useEffect(() => {
-        if (count < 0) {
-            clearInterval(timer.current);
-            setCount(60)
-        };
-    }, [count]);
     return (
         <div className='edit-password'>
             <Modal title={null} width={600} open={visible} onCancel={() => {
@@ -79,7 +63,7 @@ const EditPassword = (props: Props): ReactElement<ReactNode> => {
                         <div className='inp-inner'>
                             <p className='inner-label'>验证码<sup>*</sup></p>
                             <Input type='number' maxLength={6} placeholder='请输入验证码'/>
-                            <p className={`send-code ${count < 60 ? 'un-touch' : ''}`} onClick={count === 60 ? () => {countDown()} : () => {}}>{count === 60 ? '发送验证码' : `${count} s`}</p>
+                            <p className={`send-code ${count < 60 ? 'un-touch' : ''}`} onClick={count === 60 ? () => {startTimer()} : () => {}}>{count === 60 ? '发送验证码' : `${count} s`}</p>
                         </div>
                     </div>
                     <div className='modal-footer-mine'>

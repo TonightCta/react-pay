@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import { IResponse } from '../utils/types';
 
 let axiosInstance: AxiosInstance = axios.create({
     baseURL: process.env.REACT_APP_BASEURL,
@@ -10,7 +11,7 @@ let axiosInstance: AxiosInstance = axios.create({
 });
 axiosInstance.interceptors.request.use(
     config => {
-        config.headers!.authorization = String(localStorage.getItem('token_ib_new'))
+        config.headers!.authorization = String(sessionStorage.getItem('new_token'))
         // config.headers!.Lang = store.getState().language || String(localStorage.getItem('language'))
         return config
     },
@@ -71,7 +72,7 @@ axiosInstance.interceptors.response.use(
         throw new Error(error)
     },
 );
-export const get = <T>(url: string, params?: any): Promise<T> => {
+export const get = (url: string, params?: any): Promise<IResponse> => {
     return new Promise((resolve: any, reject: any): void => {
         axiosInstance({
             method: 'get',
@@ -84,7 +85,7 @@ export const get = <T>(url: string, params?: any): Promise<T> => {
         })
     })
 };
-export const post = <T>(url: string, params: any): Promise<T> => {
+export const post = (url: string, params: any): Promise<IResponse> => {
     return new Promise((resolve: any, reject: any): void => {
         axiosInstance({
             method: 'post',

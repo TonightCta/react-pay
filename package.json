@@ -29,8 +29,6 @@
     "css-minimizer-webpack-plugin": "^3.2.0",
     "dotenv": "^10.0.0",
     "dotenv-expand": "^5.1.0",
-    "element-react": "^1.4.34",
-    "element-theme-default": "^1.4.13",
     "eslint": "^8.3.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-webpack-plugin": "^3.1.1",
@@ -73,8 +71,8 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "set PORT=3080 && node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "node -r dotenv/config scripts/start.js dotenv_config_path=.env.development",
+    "build": "node -r dotenv/config scripts/build.js dotenv_config_path=.env.master",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

@@ -1,7 +1,9 @@
 
 import { Button, Modal } from 'antd';
-import { ReactElement, ReactNode, useState, useEffect } from 'react';
+import { ReactElement, ReactNode, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IBPay } from '../../../App';
+import { Type } from '../../../utils/interface';
 
 
 interface Props {
@@ -12,7 +14,7 @@ interface Props {
 const LoginOut = (props: Props): ReactElement<ReactNode> => {
 
     const [visible, setVisible] = useState<boolean>(false);
-
+    const { dispatch } = useContext(IBPay)
     const closeModal = (): void => {
         setVisible(false);
         props.resetModal(false)
@@ -43,11 +45,16 @@ const LoginOut = (props: Props): ReactElement<ReactNode> => {
                         }} className="cancel-btn">取消</Button>
                         <Button type='primary' className='confirm-btn' onClick={() => {
                             sessionStorage.clear();
+                            dispatch({
+                                type:Type.SET_NEW_TOKEN,
+                                payload:{
+                                    token_new:''
+                                }
+                            })
                             navigate('/login');
                         }}>确定</Button>
                     </div>
                 </div>
-
             </Modal>
         </div>
     )

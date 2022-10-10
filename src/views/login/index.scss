@@ -91,6 +91,7 @@
       margin-top: 34px;
       .inp-box {
         margin-bottom: 20px;
+        position: relative;
         .inp-label {
           font-size: 16px;
           color: #333;
@@ -125,6 +126,8 @@
           cursor: pointer;
           display: flex;
           align-items: center;
+          position: relative;
+          top:auto;
         }
         .send-code::before{
           content: '';
@@ -133,6 +136,11 @@
           display: inline-block;
           background-color: #ccc;
           margin-right: 16px;
+          transform: translateY(0);
+        }
+        .no-touch{
+          filter: grayscale(100%);
+          cursor: no-drop;
         }
       }
       .oper-box {

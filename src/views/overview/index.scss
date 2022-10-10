@@ -146,7 +146,8 @@
             font-weight: 500;
           }
           .auth-btn {
-            width: 120px;
+            width: 100px;
+            min-width: 92px;
             border: 1px solid #d82323;
             height: 42px;
             border-radius: 4px;
@@ -157,7 +158,7 @@
             align-items: center;
           }
           .oper-btn {
-            width: 160px;
+            width: 140px;
             background-color: rgba(93, 59, 252, 0.04);
             color: #5c3bfc;
             border: 1px solid rgba(104, 50, 255, 0.24);
@@ -545,6 +546,10 @@
     .flex-left-1 {
       .left-box {
         width: 550px;
+        .oper-btn {
+          width: 160px;
+        }
+
       }
     }
   }

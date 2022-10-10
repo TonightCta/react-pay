@@ -8,7 +8,7 @@ import zhCN from 'antd/es/locale/zh_CN';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
-let chartsBox : any;
+let chartsBox: any;
 
 const BillCharts = (): ReactElement => {
     const handleChange = (e: string): void => {
@@ -18,40 +18,37 @@ const BillCharts = (): ReactElement => {
         chartsBox.resize();
     }
     useEffect(() => {
-        window.addEventListener('resize',resize,true);
+        window.addEventListener('resize', resize, true);
         return () => {
-            window.removeEventListener('resize',resize,true)
+            window.removeEventListener('resize', resize, true)
         }
-    },[]);
+    }, []);
     const option = {
         tooltip: {
             trigger: 'axis',
-            formatter: (params:any) => {
+            formatter: (params: any) => {
                 let result = "";
-                params.forEach((e:any) => {
-                  result +=
-                    `<div style="margin-top:12px;display:flex;justify-content: space-between;"><div style="display:flex;"><p style="transform:scale(0.7);">${e.marker}</p>` +
-                    `<p>${e.seriesName}</p></div>` +
-                    `<p style="margin-left:16px;">${Number(e.value).toFixed(
-                      4
-                    )}&nbsp;${
-                      'USDT'
-                    }</p></div>`;
+                params.forEach((e: any) => {
+                    result +=
+                        `<div style="margin-top:12px;display:flex;justify-content: space-between;"><div style="display:flex;"><p style="transform:scale(0.7);">${e.marker}</p>` +
+                        `<p>${e.seriesName}</p></div>` +
+                        `<p style="margin-left:16px;">${Number(e.value).toFixed(
+                            4
+                        )}&nbsp;${'USDT'
+                        }</p></div>`;
                 });
                 return `<p style="text-align:left;">${params[0].name}</p>` + result;
-              },
-              extraCssText:'background:rgba(4, 28, 75, 0.8);padding:16px 26px;border:0;border-radius:20px;backdrop-filter: blur(2px);color:white;'
+            },
+            extraCssText: 'background:rgba(4, 28, 75, 0.8);padding:16px 26px;border:0;border-radius:20px;backdrop-filter: blur(2px);color:white;'
         },
         legend: {
             data: ['商户充值', '商户提币', '用户提币', '用户充值'],
             icon: "circle",
             itemWidth: 6,
             itemGap: 48,
-            textStyle: {
-                fontSize: 14,
-                color: "#999",
-                padding: [0, 0, 0, 10],
-            },
+            fontSize: 14,
+            color: "#999",
+            padding: [0, 0, 0, 10],
         },
         //#BFBFBF
         grid: {
@@ -65,28 +62,26 @@ const BillCharts = (): ReactElement => {
             boundaryGap: false,
             data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             offset: 10,
-            axisTick:{
-                lineStyle:{
-                    color:'#BFBFBF'
+            axisTick: {
+                lineStyle: {
+                    color: '#BFBFBF'
                 }
             },
-            axisLine:{
-                lineStyle:{
-                    color:'#BFBFBF'
+            axisLine: {
+                lineStyle: {
+                    color: '#BFBFBF'
                 }
             },
-            axisLabel:{
-                textStyle:{
-                    color:'#333'
-                }
+            axisLabel: {
+                color: '#333'
             }
         },
         yAxis: {
             type: 'value',
-            splitLine:{
-                lineStyle:{
-                    color:'#E6E6E6',
-                    type:'dashed'
+            splitLine: {
+                lineStyle: {
+                    color: '#E6E6E6',
+                    type: 'dashed'
                 }
             }
         },

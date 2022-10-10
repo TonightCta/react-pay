@@ -1,8 +1,13 @@
 
-import { Button } from 'antd';
-import { ReactElement, ReactNode, useState, useEffect } from 'react';
+import { Button,message } from 'antd';
+import { ReactElement, ReactNode, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CheckEmail } from '../../utils';
+import { LoginApi,MerchantInfoApi,MerchantListApi,UpdatePassApi } from '../../request/api';
 import './index.scss';
+import { Type } from '../../utils/interface';
+import { IBPay } from '../../App';
+import { useCountdown } from '../../utils/hooks';
 
 interface Login {
     email: string,
@@ -32,6 +37,7 @@ const sourceForget: Forget = {
 
 const LoginIndex = (): ReactElement<ReactNode> => {
     const navigate = useNavigate();
+    const { dispatch } = useContext(IBPay)
     // 登录 & 忘记密码
     const [showContent, setShowContent] = useState<number>(1);
     //查看密码
@@ -40,15 +46,120 @@ const LoginIndex = (): ReactElement<ReactNode> => {
         new: 'password',
         repeat: 'password'
     });
+    //倒计时
+    const { count,startTimer } = useCountdown(60);
     //登录信息
     const [loginMsg, setLoginMsg] = useState<Login>(sourceLogin);
     //忘记密码信息
     const [forgetMsg, setForgetMsg] = useState<Forget>(sourceForget);
+    const [waitResult,setWaitResult] = useState<boolean>(false);
     //设置默认数据
     useEffect(() => {
         setLoginMsg(sourceLogin)
         setForgetMsg(sourceForget)
-    }, [showContent])
+    }, [showContent]);
+    //登录
+    const loginService = async () => {
+        if(!loginMsg.email){
+            message.error('请输入邮箱地址');
+            return
+        };
+        if(!CheckEmail(loginMsg.email)){
+            message.error('请输入正确的邮箱地址');
+            return
+        }
+        if(!loginMsg.pass){
+            message.error('请输入您的登录密码');
+            return
+        };
+        setWaitResult(true)
+        const result = await LoginApi({
+            email: loginMsg.email,
+            loginMode: "pwd",
+            ga_code: loginMsg.auth,
+            password: loginMsg.pass,
+            pushId: "11",
+        });
+        setWaitResult(false);
+        const { code,data } = result;
+        if(code !== 200){
+            message.error(result.message);
+            return;
+        };
+        dispatch({
+            type: Type.SET_NEW_TOKEN,
+            payload: {
+                token_new: `${data.token_type} ${data.access_token}`
+            }
+        });
+        sessionStorage.setItem('new_token', `${data.token_type} ${data.access_token}`)
+        const info = await MerchantInfoApi({});
+        dispatch({
+            type:Type.SET_MERCHANT_ID,
+            payload:{
+                merchant_id:info.data.merchantInfo.mch_id
+            }
+        })
+        dispatch({
+            type: Type.SET_ACCOUNT,
+            payload: {
+                account: JSON.stringify(info.data)
+            }
+        });
+        const merchant = await MerchantListApi({
+            page:1,
+            limit:100
+        });
+        dispatch({
+            type:Type.SET_MERCHANT_LIST,
+            payload:{
+                merchant_list:merchant.data.list
+            }
+        });        
+        navigate('/');
+    };
+    //发送验证码
+    const sendCodeService = async () => {
+        // startTimer()
+    }
+    //找回密码
+    const forgetService = async () => {
+        if(!forgetMsg.email){
+            message.error('请输入邮箱地址');
+            return
+        };
+        if(!CheckEmail(forgetMsg.email)){
+            message.error('请输入正确的邮箱地址');
+            return
+        };
+        if(!forgetMsg.code){
+            message.error('请输入邮箱验证码');
+            return
+        };
+        if(!forgetMsg.new){
+            message.error('请输入新密码');
+            return;
+        };
+        if(!forgetMsg.repeat){
+            message.error('请再次输入新密码');
+            return;
+        };
+        if(forgetMsg.new !== forgetMsg.repeat){
+            message.error('两次密码不一致');
+            return
+        };
+        const result = await UpdatePassApi({
+            email: forgetMsg.email,
+            code: forgetMsg.code,
+            password: forgetMsg.repeat
+        });
+        const { code } = result;
+        if(code !== 200){
+            message.error(result.message);
+            return
+        };
+        message.success('密码重置成功');
+    }
     return (
         <div className='login-index'>
             <div className='top-right-color'></div>
@@ -108,8 +219,8 @@ const LoginIndex = (): ReactElement<ReactNode> => {
                                 </div>
                             </div>
                             <div className='oper-box'>
-                                <Button type='primary' block onClick={() => {
-                                    navigate('/')
+                                <Button type='primary' loading={waitResult} block onClick={() => {
+                                    loginService()
                                 }}>登录</Button>
                             </div>
                             <p className='forget-pass'>您是否忘记密码？<span onClick={() => {
@@ -147,7 +258,9 @@ const LoginIndex = (): ReactElement<ReactNode> => {
                                             code: e.target.value
                                         })
                                     }} placeholder='请输入验证码' autoComplete='off' />
-                                    <p className='send-code'>发送验证码</p>
+                                    <p className={`send-code ${count < 60 ? 'no-touch' : ''}`} onClick={count === 60 ? () => {
+                                        sendCodeService()
+                                    } : () => {}}>{count === 60 ? '获取验证码' : `${count} s`}</p>
                                 </div>
                             </div>
                             <div className='inp-box'>
@@ -190,7 +303,9 @@ const LoginIndex = (): ReactElement<ReactNode> => {
                                 <Button type='default' className='default-btn' onClick={() => {
                                     setShowContent(1)
                                 }}>返回</Button>
-                                <Button type='primary' block>确认</Button>
+                                <Button type='primary' block onClick={() => {
+                                    forgetService();
+                                }}>确认</Button>
                             </div>
                         </div>
                     </div>

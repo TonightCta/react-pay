@@ -2,6 +2,7 @@
 import { Button, Modal, Popover, notification, Input } from 'antd';
 import { ReactElement, ReactNode, useState, useEffect, useRef, useCallback } from 'react';
 import copy from 'copy-to-clipboard'
+import { useCountdown } from '../../../../utils/hooks';
 
 interface Props {
     value: boolean,
@@ -18,24 +19,8 @@ const WithDrawBox = (props: Props): ReactElement<ReactNode> => {
         setVisible(false);
         props.resetModal(false);
     };
-    const [count, setCount] = useState<number>(60);
-    const cbSaver : any = useRef();
-    const timer = useRef<NodeJS.Timer>();
-    cbSaver.current = () => {
-        setCount(count - 1);
-    };
-    const countDown = useCallback((): void => {
-        timer.current = setInterval(() => {
-            cbSaver.current();
-        }, 1000);
-    }, []);
+    const { count, startTimer } = useCountdown(60);
 
-    useEffect(() => {
-        if (count < 0) {
-            clearInterval(timer.current);
-            setCount(60)
-        };
-    }, [count]);
     const [showPassword, setShowPassword] = useState<string>('password')
     return (
         <div className='withdraw-box'>
@@ -104,7 +89,7 @@ const WithDrawBox = (props: Props): ReactElement<ReactNode> => {
                             <div className='inp-inner'>
                                 <p className='inner-label'>验证码<sup>*</sup></p>
                                 <Input type='number' maxLength={6} placeholder='请输入验证码' />
-                                <p className={`send-code ${count < 60 ? 'un-touch' : ''}`} onClick={count === 60 ? () => { countDown() } : () => { }}>{count === 60 ? '发送验证码' : `${count} s`}</p>
+                                <p className={`send-code ${count < 60 ? 'un-touch' : ''}`} onClick={count === 60 ? () => { startTimer() } : () => { }}>{count === 60 ? '发送验证码' : `${count} s`}</p>
                             </div>
                             <div className='inp-inner'>
                                 <p className='inner-label'>交易密码<sup>*</sup></p>
