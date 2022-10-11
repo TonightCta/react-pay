@@ -1,6 +1,8 @@
 
 import { Popover } from 'antd';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useContext, useEffect, useState } from 'react';
+import { IBPay } from '../../../App';
+import { MerchantViewApi } from '../../../request/api';
 
 interface Inner {
     name: string,
@@ -132,17 +134,44 @@ const source = [
 
 const AdminView = (): ReactElement => {
     const [list, setList] = useState<Card[]>(source);
-    const MoreContent = (props:{list:Inner[]}) : ReactElement => {
+    const { state } = useContext(IBPay);
+    const assetsInfo = async () => {
+        const { merchant_id } = state;
+        const result = await MerchantViewApi({
+            mch_id: merchant_id
+        });
+        const list = source;
+        const { data } = result;
+        list[0].count = data.merchantsNumber;
+        list[1].count = data.totalWithdraw.toFixed(0);
+        list[1].more[0].list = data.merchantsWithdraws;
+        list[1].more[1].list = data.usersWithdraws;
+        list[2].count = data.totalDeposit.toFixed(0);
+        list[2].more[0].list = data.merchantsDeposits;
+        list[2].more[1].list = data.usersDeposits;
+        list[3].count = data.totalFee.toFixed(0);
+        list[3].more[0].list = data.allDepositFee;
+        list[3].more[1].list = data.allWithdrawFee;
+        list[3].more[2].list = data.allMinerFee;
+        setList([...list])
+    };
+    useEffect(() => {
+        assetsInfo();
+        return () => {
+            setList(source)
+        }
+    }, []);
+    const MoreContent = (props: { list: Inner[] }): ReactElement => {
         return (
             <div className='more-content'>
                 {
-                    props.list.map((item:Inner,index:number) : ReactElement => {
+                    props.list.map((item: Inner, index: number): ReactElement => {
                         return (
                             <div key={index}>
                                 <p className='inner-title'>{item.name}</p>
                                 <ul>
                                     {
-                                        item.list.map((inner,indexInner) : ReactElement => {
+                                        item.list.map((inner, indexInner): ReactElement => {
                                             return (
                                                 <li key={indexInner}>
                                                     <p>{inner.coin}</p>
@@ -171,11 +200,11 @@ const AdminView = (): ReactElement => {
                                 </div>
                                 <div className='card-msg'>
                                     <p>{item.title}</p>
-                                    <p>{item.count}</p>
+                                    <p>{item.count}&nbsp;{item.uint}</p>
                                 </div>
                                 {
                                     item.more.length > 0 && <div className='more-detail'>
-                                        <Popover content={<MoreContent list={item.more}/>} trigger="hover" placement="bottomRight">
+                                        <Popover content={<MoreContent list={item.more} />} trigger="hover" placement="bottomRight">
                                             <div className='more-inner'>
                                                 <p>明细</p>
                                                 <p><span className='iconfont icon-bizhongmingxi'></span></p>

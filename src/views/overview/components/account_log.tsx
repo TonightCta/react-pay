@@ -1,23 +1,69 @@
 
 import { Button, Popover } from 'antd';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState, useContext } from 'react';
 import BalanceCard from './balance_card';
 import LoginLog from './login_log';
 import SettlementBox from './settlement_box';
+import { IBPay } from '../../../App';
+import { useEffect } from 'react';
+import { Type } from '../../../utils/interface';
+
+
+interface Account {
+    email: string,
+    ga: number,
+    is_admin: boolean,
+    last_login_time: string,
+    mch_id: string,
+    name: string,
+}
+
+const sourceAccount: Account = {
+    email: '',
+    ga: 0,
+    is_admin: false,
+    last_login_time: '',
+    mch_id: '',
+    name: '',
+}
 
 const AccountLog = (): ReactElement => {
-    const merchant: string[] = ['s9756382730@outlook.com', 's9756382730@outlook.com', 's9756382730@outlook.com'];
-
+    const { state, dispatch } = useContext(IBPay);
+    // const merchant: string[] = ['s9756382730@outlook.com', 's9756382730@outlook.com', 's9756382730@outlook.com'];
+    const [merchantList, setMerchantList] = useState<any[]>([]);
+    const [account, setAccount] = useState<Account>(sourceAccount);
+    const [selectAccount, setSelecyAccount] = useState<Account>(sourceAccount);
+    useEffect(() => {
+        setMerchantList(state.merchant_list as []);
+        setAccount(JSON.parse(state.account || '{}')?.merchantInfo);
+        setSelecyAccount(JSON.parse(state.other_merchant || '{}'));
+    }, [state.merchant_list]);
     const [visible, setVisible] = useState<boolean>(false);
-    const [boxType,setBoxType] = useState<number>(1);
+    const [boxType, setBoxType] = useState<number>(1);
+    const [selectMerchantPopup, setSelectMerchantPopup] = useState<boolean>(false);
     const SelectMerchant = (): ReactElement => {
         return (
             <div className='select-merchant'>
                 <ul>
                     {
-                        merchant.map((item, index): ReactElement => {
+                        merchantList.map((item, index): ReactElement => {
                             return (
-                                <li key={index}>{item}</li>
+                                <li key={index} onClick={() => {
+                                    setSelectMerchantPopup(false);
+                                    setSelecyAccount(item.mch_id === account.mch_id ? sourceAccount : item)
+                                    dispatch({
+                                        type:Type.SET_OTHER_MERCHANT,
+                                        payload:{
+                                            other_merchant:JSON.stringify(item.mch_id === account.mch_id ? sourceAccount : item)
+                                        }
+                                    });
+                                    dispatch({
+                                        type: Type.SET_MERCHANT_ID,
+                                        payload: {
+                                            merchant_id: item.mch_id
+                                        }
+                                    });
+                                }}>{item.email}({item.name})</li>
                             )
                         })
                     }
@@ -25,6 +71,9 @@ const AccountLog = (): ReactElement => {
             </div>
         )
     }
+    const handleOpenChange = (newOpen: boolean) => {
+        setSelectMerchantPopup(newOpen);
+    };
     return (
         <div className='account-log'>
             {/* 账户信息概览 */}
@@ -33,8 +82,8 @@ const AccountLog = (): ReactElement => {
                     <img src={require('../../../assets/images/test.png')} alt="" />
                 </div>
                 <div className='name-msg'>
-                    <p className='account-name'>s9756382730@outlook.com</p>
-                    <Popover placement="bottomRight" arrowPointAtCenter content={<SelectMerchant />} trigger="hover">
+                    <p className='account-name'>{selectAccount.name ? selectAccount.name : account.name}</p>
+                    <Popover placement="bottomRight" onOpenChange={handleOpenChange} open={selectMerchantPopup} arrowPointAtCenter content={<SelectMerchant />} trigger="hover">
                         <div className='view-other-account'>
                             <p className='iconfont icon-xiala'></p>
                         </div>
@@ -47,7 +96,11 @@ const AccountLog = (): ReactElement => {
             {/* 账户操作 */}
             <div className='bind-msg'>
                 <div className='auth-btn'>
-                    <p>未绑定</p>
+                    <p>
+                        {
+                            (selectAccount.ga ? selectAccount.ga : account.ga) === 0 ? '未绑定' : '已绑定'
+                        }
+                    </p>
                 </div>
                 <p className='mask-line'></p>
                 <div className='oper-box-btn'>
@@ -66,15 +119,15 @@ const AccountLog = (): ReactElement => {
                 <ul>
                     <li>
                         <p>商户号</p>
-                        <p>AcRXpWejqMiKngA1wkxWJM2u</p>
+                        <p>{selectAccount.mch_id ? selectAccount.mch_id : account.mch_id}</p>
                     </li>
                     <li>
                         <p>邮箱</p>
-                        <p>1332568474@gmail.com</p>
+                        <p>{selectAccount.email ? selectAccount.email : account.email}</p>
                     </li>
                     <li>
                         <p>上次登录时间</p>
-                        <p>2022-05-15 12:56:56</p>
+                        <p>{selectAccount.last_login_time ? selectAccount.last_login_time : account.last_login_time}</p>
                     </li>
                 </ul>
             </div>

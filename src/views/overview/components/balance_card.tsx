@@ -1,7 +1,9 @@
 
 import { Popover, Tooltip } from 'antd';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { WalletViewApi } from '../../../request/api';
+import { IBPay } from '../../../App';
 
 interface Balance {
     icon: string,
@@ -93,7 +95,33 @@ const source: Balance[] = [
 
 const BalanceCard = (): ReactElement => {
     const [list, setList] = useState<Balance[]>(source);
+    const { state } = useContext(IBPay);
     const navigate = useNavigate();
+    useEffect(() => {
+        return () => {
+            setList(source)
+        }
+    }, []);
+    useEffect(() => {
+        walletViewService();
+    },[state.merchant_id])
+    const walletViewService = async () => {
+        const { merchant_id } = state;
+        const reuslt = await WalletViewApi({
+            mch_id: merchant_id
+        });
+        const list = source;
+        const { data } = reuslt;
+        list[0].count = data.mchAvailableTotal;
+        list[0].detail = data.mchAvailable;
+        list[1].count = data.mchFeeAvailableTotal;
+        list[1].detail = data.mchFeeAvailable;
+        list[2].count = data.userAvailableTotal;
+        list[2].detail = data.userAvailable;
+        list[3].count = data.userFeeAvailableTotal;
+        list[3].detail = data.userFeeAvailable;
+        setList([...list])
+    }
     const DetailContent = (props: { list: Inner[] }): ReactElement => {
         return (
             <div className='balance-detail-popover'>
@@ -144,14 +172,13 @@ const BalanceCard = (): ReactElement => {
                                             </Tooltip>
                                         }
                                     </div>
-                                    <p className='balance-count'>{item.count}&nbsp;{item.uint}</p>
-                                    <Popover placement="bottomLeft" content={<DetailContent list={item.detail} />} trigger="hover">
+                                    <p className='balance-count'>{Number(item.count).toFixed(2)}&nbsp;{item.uint}</p>
+                                    <Popover placement="bottomLeft" content={<DetailContent list={item.detail} />} trigger="click">
                                         <div className='balance-detail'>
                                             <p>币种明细</p>
                                             <img src={require('../../../assets/images/down_icon.png')} alt="" />
                                         </div>
                                     </Popover>
-
                                 </div>
                             </li>
                         )

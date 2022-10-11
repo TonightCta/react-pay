@@ -5,6 +5,7 @@ export interface State{
     merchant_id?:string,
     account?:string,
     merchant_list?:any[],
+    other_merchant?:string
 }
 
 export enum Type{
@@ -12,7 +13,8 @@ export enum Type{
     SET_NEW_TOKEN = 'set_new_token',
     SET_MERCHANT_ID = 'set_merchant_id',
     SET_ACCOUNT = 'set_account',
-    SET_MERCHANT_LIST = 'set_merchant_list'
+    SET_MERCHANT_LIST = 'set_merchant_list',
+    SET_OTHER_MERCHANT = 'set_other_merchant'
 };
 
 export interface IAction{

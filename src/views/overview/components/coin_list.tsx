@@ -1,9 +1,9 @@
 
-import { ConfigProvider, DatePicker, Select, Table, Tooltip } from 'antd';
+import { ConfigProvider, DatePicker, Select, Table } from 'antd';
 import { ReactElement, useContext } from 'react';
 import zhCN from 'antd/es/locale/zh_CN';
 import type { ColumnsType } from 'antd/es/table';
-import { ButtlistApi } from '../../../request/api'
+import { CoinlogApi } from '../../../request/api'
 import { IBPay } from '../../../App';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -13,31 +13,14 @@ const { Option } = Select;
 
 interface DataType {
     key: string,
-    mch_name: string,
-    mch_balance: number,
     coin: string,
-    from_before_balance: number,
-    from: string,
-    to: string,
-    amount: number,
-    created_at: string,
-    comment: string,
-    link: string
+    todayDeposit: number,
+    yesterdayDeposit: string,
+    todayWithdraw: number,
+    yesterdayWithdraw: number,
 }
 
 const columns: ColumnsType<DataType> = [
-    {
-        title: '商户名称',
-        dataIndex: 'mch_name',
-        key: 'mch_name',
-        align: 'center',
-    },
-    {
-        title: '处理前后台余额',
-        dataIndex: 'mch_balance',
-        align: 'center',
-        key: 'mch_balance',
-    },
     {
         title: '币种',
         dataIndex: 'coin',
@@ -45,74 +28,36 @@ const columns: ColumnsType<DataType> = [
         key: 'coin',
     },
     {
-        title: '处理前链上余额',
-        dataIndex: 'from_before_balance',
+        title: '今日收款',
+        dataIndex: 'todayDeposit',
         align: 'center',
-        key: 'from_before_balance',
+        key: 'todayDeposit',
     },
     {
-        title: '转出地址',
-        dataIndex: 'from',
-        key: 'from',
-        render: (_, { from }): ReactElement => (
-            <Tooltip placement="top" title={from}>
-                <p className='text-overflow'>{from}</p>
-            </Tooltip>
-        ),
-    },
-    {
-        title: '目标地址',
-        dataIndex: 'to',
-        key: 'to',
-        render: (_, { to }): ReactElement => (
-            <Tooltip placement="top" title={to}>
-                <p className='text-overflow'>{to}</p>
-            </Tooltip>
-        ),
-    },
-    {
-        title: '转出数量',
-        dataIndex: 'amount',
+        title: '今日提币',
+        dataIndex: 'todayWithdraw',
         align: 'center',
-        key: 'amount',
+        key: 'todayWithdraw',
     },
     {
-        title: '操作时间',
-        dataIndex: 'created_at',
-        align: 'center',
-        key: 'created_at',
+        title: '昨日收款',
+        dataIndex: 'yesterdayDeposit',
+        key: 'yesterdayDeposit'
     },
     {
-        title: '交易哈希',
-        dataIndex: 'link',
-        key: 'link',
-        align: 'center',
-        render: (_, { link }): ReactElement => (
-            <p className='liquire-hash' onClick={() => {
-                window.open(link)
-            }}>查看</p>
-        )
-    },
-    {
-        title: '备注',
-        dataIndex: 'comment',
-        key: 'comment',
-        align: 'center',
-        render: (_, { comment }): ReactElement => (
-            <p>{comment ? comment : '-'}</p>
-        )
+        title: '昨日提币',
+        dataIndex: 'yesterdayWithdraw',
+        key: 'yesterdayWithdraw'
     },
 ];
 
-const SettlementList = (): ReactElement => {
+const CoinList = (): ReactElement => {
     const { state } = useContext(IBPay);
     const [waitResult,setWaitResult] = useState<boolean>(false);
     //支持的币种列表
     const [coinList, setCoinList] = useState<string[]>([]);
     //筛选币种
     const [selectCoin, setSelectCoin] = useState<string>('');
-    //筛选状态
-    const [selectStatus,setSelectStatus] = useState<string>('');
     //筛选时间
     const [filterDate,setFilterDate] = useState<{start:string,end:string}>({
         start:'',
@@ -124,23 +69,22 @@ const SettlementList = (): ReactElement => {
     const buttListService = async () => {
         const { merchant_id } = state;
         setWaitResult(true)
-        const result = await ButtlistApi({
+        const result = await CoinlogApi({
             page: 1,
             limit: 200,
             mch_id: merchant_id,
             coin: selectCoin,
-            type:selectStatus,
             start:filterDate.start,
             end:filterDate.end
         });
         setWaitResult(false);
-        if(!result.data.list){
+        if(!result.data){
             return
         }
-        result.data.list.forEach((e: any, i: number) => {
+        result.data.forEach((e: any, i: number) => {
             Object.assign(e, { key: String(i + 1) })
         })
-        dateSource(result.data.list)
+        dateSource(result.data)
     };
     //获取支持币种
     useEffect(() => {
@@ -150,25 +94,10 @@ const SettlementList = (): ReactElement => {
             return item.asset
         }));
     }, []);
-    //数据状态列表
-    const typeList = [
-        {
-            value: "1",
-            label: "利润结算",
-        },
-        {
-            value: "2",
-            label: "提取余额",
-        },
-    ];
     //选择币种
     const selectCoinEv = (el: string): void => {
         setSelectCoin(el === 'all' ? ' ' : el);
     }
-    //选择状态
-    const selectStatusEv = (el: string): void => {
-        setSelectStatus(el === 'all' ? ' ' : el)
-    };
     //筛选时间
     const selectDate = (e:any) : void => {
         setFilterDate({
@@ -178,24 +107,12 @@ const SettlementList = (): ReactElement => {
     };
     useEffect(() => {
         buttListService();
-    }, [state.merchant_id,selectCoin,selectStatus,filterDate.end]);
+    }, [state.merchant_id,selectCoin,filterDate.end]);
     return (
         <div className='settlement-list'>
             <div className='public-title'>
-                <p>利润/余额提取</p>
+                <p>币种统计</p>
                 <div className='right-oper'>
-                    <div className='select-coin'>
-                        <Select placeholder="类型" defaultValue="all" allowClear={true} style={{ width: 120 }} suffixIcon={<span className='iconfont icon-cangpeitubiao_xiazaipandiandanxiazaidayinmoban1'></span>} onChange={selectStatusEv}>
-                            <Option value="all">全部</Option>
-                            {
-                                typeList.map((item: { value: string, label: string },index:number): ReactElement => {
-                                    return (
-                                        <Option key={index} value={item.value}>{item.label}</Option>
-                                    )
-                                })
-                            }
-                        </Select>
-                    </div>
                     <div className='select-coin'>
                         <Select placeholder="币种" defaultValue="all" style={{ width: 108 }} suffixIcon={<span className='iconfont icon-cangpeitubiao_xiazaipandiandanxiazaidayinmoban1'></span>} onChange={selectCoinEv}>
                             <Option value="all">全部</Option>
@@ -223,4 +140,4 @@ const SettlementList = (): ReactElement => {
     )
 };
 
-export default SettlementList;
+export default CoinList;

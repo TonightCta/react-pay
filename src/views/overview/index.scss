@@ -326,6 +326,7 @@
     }
   }
   .ant-pagination {
+    display: flex;
     li {
       width: 26px;
       min-width: 26px;
@@ -340,6 +341,16 @@
         align-items: center;
         justify-content: center;
       }
+    }
+    .ant-pagination-options{
+      display: none;
+    }
+    .ant-pagination-jump-prev-custom-icon,.ant-pagination-jump-next-custom-icon{
+      background-color: rgba(0,0,0,0);
+      width: auto;
+      min-width: 32px;
+      display: block;
+      transform: translateY(-2px);
     }
     .ant-pagination-prev,
     .ant-pagination-next {
@@ -372,6 +383,18 @@
       }
     }
   }
+  // .page-oper {
+  //   width: 100%;
+  //   display: flex;
+  //   justify-content: flex-end;
+  //   margin-top: 40px;
+  //   .ant-pagination-item-active {
+  //     background-color: #694afd;
+  //     a {
+  //       color: white;
+  //     }
+  //   }
+  // }
 }
 .ant-popover-inner {
   border-radius: 4px !important;
@@ -380,6 +403,8 @@
   padding: 0 !important;
   .select-merchant {
     ul {
+      max-height: 500px;
+      overflow: auto;
       li {
         padding: 14px 12px;
         cursor: pointer;
@@ -405,6 +430,7 @@
       li {
         display: flex;
         padding: 8px 18px;
+        justify-content: space-between;
         p {
           font-size: 14px;
           color: #666;
@@ -418,6 +444,8 @@
   }
   .balance-detail-popover {
     ul {
+      max-height: 600px;
+      overflow: auto;
       li {
         min-width: 180px;
         .coin-name {

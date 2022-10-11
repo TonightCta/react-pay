@@ -209,7 +209,12 @@
       }
     }
   }
+ 
 }
-.ant-popover-inner-content{
-    padding: 12px!important;
+.ant-popconfirm{
+  .ant-popover-content{
+    .ant-popover-inner{
+      padding: 12px!important;
+    }
+  }
 }

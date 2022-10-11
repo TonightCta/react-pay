@@ -17,20 +17,39 @@
       border-radius: 4px;
       display: table;
       margin: 0 auto;
+      background-color: #f8f8f8;
     }
-    .font-14{
+    .font-14 {
       font-size: 14px;
     }
     .success-order {
       background: rgba(36, 255, 0, 0.1);
       color: #019e00;
     }
-    .failed-order{
+    .failed-order {
       background-color: #f8f8f8;
       color: #666;
     }
     .table-row-mine {
       font-size: 12px;
+    }
+    button {
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    .withdraw-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        background-color: white;
+        border: 1px solid #5f3efc;
+        color: #5f3efc;
+      }
+      p {
+        display: inline-block;
+        width: 12px;
+      }
     }
   }
   .page-oper {
@@ -43,6 +62,19 @@
       a {
         color: white;
       }
+    }
+  }
+}
+.set-hash-content {
+  padding: 20px 30px 40px;
+  .inp-box {
+    display: flex;
+    align-items: center;
+    input {
+      height: 44px;
+      border-radius: 4px;
+      background-color: #FAF8FF;
+      border-color: rgba(104, 72, 253, 0.2000);
     }
   }
 }

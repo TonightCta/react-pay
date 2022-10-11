@@ -1,9 +1,9 @@
 
-import { Button,message } from 'antd';
+import { Button, message } from 'antd';
 import { ReactElement, ReactNode, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckEmail } from '../../utils';
-import { LoginApi,MerchantInfoApi,MerchantListApi,UpdatePassApi } from '../../request/api';
+import { LoginApi, MerchantInfoApi, MerchantListApi, UpdatePassApi, SendCodeApi } from '../../request/api';
 import './index.scss';
 import { Type } from '../../utils/interface';
 import { IBPay } from '../../App';
@@ -47,12 +47,12 @@ const LoginIndex = (): ReactElement<ReactNode> => {
         repeat: 'password'
     });
     //倒计时
-    const { count,startTimer } = useCountdown(60);
+    const { count, startTimer } = useCountdown(60);
     //登录信息
     const [loginMsg, setLoginMsg] = useState<Login>(sourceLogin);
     //忘记密码信息
     const [forgetMsg, setForgetMsg] = useState<Forget>(sourceForget);
-    const [waitResult,setWaitResult] = useState<boolean>(false);
+    const [waitResult, setWaitResult] = useState<boolean>(false);
     //设置默认数据
     useEffect(() => {
         setLoginMsg(sourceLogin)
@@ -60,15 +60,15 @@ const LoginIndex = (): ReactElement<ReactNode> => {
     }, [showContent]);
     //登录
     const loginService = async () => {
-        if(!loginMsg.email){
+        if (!loginMsg.email) {
             message.error('请输入邮箱地址');
             return
         };
-        if(!CheckEmail(loginMsg.email)){
+        if (!CheckEmail(loginMsg.email)) {
             message.error('请输入正确的邮箱地址');
             return
         }
-        if(!loginMsg.pass){
+        if (!loginMsg.pass) {
             message.error('请输入您的登录密码');
             return
         };
@@ -81,8 +81,8 @@ const LoginIndex = (): ReactElement<ReactNode> => {
             pushId: "11",
         });
         setWaitResult(false);
-        const { code,data } = result;
-        if(code !== 200){
+        const { code, data } = result;
+        if (code !== 200) {
             message.error(result.message);
             return;
         };
@@ -95,9 +95,9 @@ const LoginIndex = (): ReactElement<ReactNode> => {
         sessionStorage.setItem('new_token', `${data.token_type} ${data.access_token}`)
         const info = await MerchantInfoApi({});
         dispatch({
-            type:Type.SET_MERCHANT_ID,
-            payload:{
-                merchant_id:info.data.merchantInfo.mch_id
+            type: Type.SET_MERCHANT_ID,
+            payload: {
+                merchant_id: info.data.merchantInfo.mch_id
             }
         })
         dispatch({
@@ -107,58 +107,79 @@ const LoginIndex = (): ReactElement<ReactNode> => {
             }
         });
         const merchant = await MerchantListApi({
-            page:1,
-            limit:100
+            page: 1,
+            limit: 100
         });
         dispatch({
-            type:Type.SET_MERCHANT_LIST,
-            payload:{
-                merchant_list:merchant.data.list
+            type: Type.SET_MERCHANT_LIST,
+            payload: {
+                merchant_list: merchant.data.list
             }
-        });        
+        });
         navigate('/');
     };
     //发送验证码
     const sendCodeService = async () => {
-        // startTimer()
-    }
-    //找回密码
-    const forgetService = async () => {
-        if(!forgetMsg.email){
+        if (!forgetMsg.email) {
             message.error('请输入邮箱地址');
             return
         };
-        if(!CheckEmail(forgetMsg.email)){
+        if (!CheckEmail(forgetMsg.email)) {
             message.error('请输入正确的邮箱地址');
             return
         };
-        if(!forgetMsg.code){
+        const result = await SendCodeApi({
+            scene: 4,
+            email: forgetMsg.email
+        });
+        const { code } = result;
+        if (code !== 200) {
+            message.error(result.message);
+            return;
+        };
+        message.success('验证码发送成功');
+        startTimer()
+    };
+    //找回密码
+    const forgetService = async () => {
+        if (!forgetMsg.email) {
+            message.error('请输入邮箱地址');
+            return
+        };
+        if (!CheckEmail(forgetMsg.email)) {
+            message.error('请输入正确的邮箱地址');
+            return
+        };
+        if (!forgetMsg.code) {
             message.error('请输入邮箱验证码');
             return
         };
-        if(!forgetMsg.new){
+        if (!forgetMsg.new) {
             message.error('请输入新密码');
             return;
         };
-        if(!forgetMsg.repeat){
+        if (!forgetMsg.repeat) {
             message.error('请再次输入新密码');
             return;
         };
-        if(forgetMsg.new !== forgetMsg.repeat){
+        if (forgetMsg.new !== forgetMsg.repeat) {
             message.error('两次密码不一致');
             return
         };
+        setWaitResult(true);
         const result = await UpdatePassApi({
             email: forgetMsg.email,
             code: forgetMsg.code,
             password: forgetMsg.repeat
         });
+        setWaitResult(false);
         const { code } = result;
-        if(code !== 200){
+        if (code !== 200) {
             message.error(result.message);
             return
         };
         message.success('密码重置成功');
+        setShowContent(1);
     }
     return (
         <div className='login-index'>
@@ -173,7 +194,7 @@ const LoginIndex = (): ReactElement<ReactNode> => {
                         <p>
                             <img src={require('../../assets/images/login_text.png')} alt="" className='login-text' />
                         </p>
-                        <p className='welcome-text'>Welcome to xxxx. </p>
+                        <p className='welcome-text'>Welcome to Internet Property. </p>
                         <div className='inp-msg'>
                             <div className='inp-box'>
                                 <p className='inp-label'>邮箱</p>
@@ -260,7 +281,7 @@ const LoginIndex = (): ReactElement<ReactNode> => {
                                     }} placeholder='请输入验证码' autoComplete='off' />
                                     <p className={`send-code ${count < 60 ? 'no-touch' : ''}`} onClick={count === 60 ? () => {
                                         sendCodeService()
-                                    } : () => {}}>{count === 60 ? '获取验证码' : `${count} s`}</p>
+                                    } : () => { }}>{count === 60 ? '获取验证码' : `${count} s`}</p>
                                 </div>
                             </div>
                             <div className='inp-box'>
@@ -301,9 +322,10 @@ const LoginIndex = (): ReactElement<ReactNode> => {
                             </div>
                             <div className='oper-box'>
                                 <Button type='default' className='default-btn' onClick={() => {
-                                    setShowContent(1)
+                                    setShowContent(1);
+                                    setWaitResult(false);
                                 }}>返回</Button>
-                                <Button type='primary' block onClick={() => {
+                                <Button type='primary' loading={waitResult} block onClick={() => {
                                     forgetService();
                                 }}>确认</Button>
                             </div>
