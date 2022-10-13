@@ -1,13 +1,48 @@
 
-import { Button } from 'antd';
-import { ReactElement, ReactNode, useState } from 'react';
+import { Button, message } from 'antd';
+import { ReactElement, ReactNode, useState, useContext } from 'react';
 import './index.scss'
+import { IBPay } from '../../../App';
+import { useEffect } from 'react';
+import copy from 'copy-to-clipboard';
+import QRCode from 'qrcode.react';
 
 
-const coin: string[] = ['TRX', 'USDT-TRC20']
+
 
 const MerchantDeposit = (): ReactElement<ReactNode> => {
+    const [coin, setCoin] = useState<string[]>([]);
     const [activeCoin, setActiveCoin] = useState<string>('TRX');
+    const { state } = useContext(IBPay);
+    const [address, setAddress] = useState<{ recharge: string, fee: string }>({
+        recharge: '',
+        fee: ''
+    });
+    const [balance,setBalance] = useState<{recharge:string,fee:string}>({
+        recharge:'0',
+        fee:'0'
+    })
+    const setRechargeMsg = (_index?: number) => {
+        const { account } = state;
+        const coins = JSON.parse(account || '{}')?.coinStatementList;
+        const feeCoins = JSON.parse(account || '{}')?.feeCoinStatementList;
+        if (!_index) {
+            setCoin(coins.map((item: { asset: string }) => {
+                return item.asset
+            }));
+        }
+        setAddress({
+            recharge: coins[_index ? _index : 0].merchantDepositAddress,
+            fee: feeCoins[_index ? _index : 0].merchantDepositAddress
+        });
+        setBalance({
+            recharge: coins[_index ? _index : 0].mchFeeAvailable,
+            fee: feeCoins[_index ? _index : 0].userFeeAvailable
+        })
+    }
+    useEffect(() => {
+        setRechargeMsg();
+    }, [])
     return (
         <div className='merchan-deposit'>
             <div className='assets-oper-remark'>
@@ -22,7 +57,8 @@ const MerchantDeposit = (): ReactElement<ReactNode> => {
                             coin.map((item: string, index: number): ReactElement => {
                                 return (
                                     <li key={index} className={`${activeCoin === item ? 'active-coin' : ''}`} onClick={() => {
-                                        setActiveCoin(item)
+                                        setActiveCoin(item);
+                                        setRechargeMsg(index);
                                     }}>
                                         {item}
                                         <div className='active-label'></div>
@@ -44,24 +80,27 @@ const MerchantDeposit = (): ReactElement<ReactNode> => {
                         </p>
                     </div>
                     <div className='address-qr'>
-                        <img src={require('../../../assets/images/qr.png')} alt="" />
+                        <QRCode value={address.recharge} size={152} id="qrCode" />
                     </div>
                     <div className='address-msg'>
                         <div className='fee-amount msg-public'>
                             <p className='msg-title'>可代付手续费</p>
-                            <p>0</p>
+                            <p>{balance.recharge}</p>
                         </div>
                         <div className='address-text msg-public'>
                             <p className='msg-title'>充值地址</p>
-                            <p className='text'>3GJieAP9YuGK89bXohtZWog9P4rhBvnRst</p>
+                            <p className='text'>{address.recharge}</p>
                             <p>
-                                <Button type='primary' size='small'>复制</Button>
+                                <Button type='primary' size='small' onClick={() => {
+                                    copy(address.recharge);
+                                    message.success('复制成功');
+                                }}>复制</Button>
                             </p>
                         </div>
                     </div>
                 </div>
                 {/* 手续费账户 */}
-                <div className='fee-account public-account'>
+                {activeCoin !== 'USDT-TRC20' && <div className='fee-account public-account'>
                     <div className='account-remark'>
                         <p className='remark-title'>
                             手续费账户&nbsp;{activeCoin}
@@ -72,22 +111,25 @@ const MerchantDeposit = (): ReactElement<ReactNode> => {
                         </p>
                     </div>
                     <div className='address-qr'>
-                        <img src={require('../../../assets/images/qr.png')} alt="" />
+                        <QRCode value={address.fee} size={152} id="qrCode" />
                     </div>
                     <div className='address-msg'>
                         <div className='fee-amount msg-public'>
                             <p className='msg-title'>可提现手续费</p>
-                            <p>0</p>
+                            <p>{balance.fee}</p>
                         </div>
                         <div className='address-text msg-public'>
                             <p className='msg-title'>充值地址</p>
-                            <p className='text'>3GJieAP9YuGK89bXohtZWog9P4rhBvnRst</p>
+                            <p className='text'>{address.fee}</p>
                             <p>
-                                <Button type='primary' size='small'>复制</Button>
+                                <Button type='primary' size='small' onClick={() => {
+                                    copy(address.fee);
+                                    message.success('复制成功');
+                                }}>复制</Button>
                             </p>
                         </div>
                     </div>
-                </div>
+                </div>}
                 {/* 购买加密货币 */}
                 <div className='coin-market-outside'>
                     <div className='market-remark'>

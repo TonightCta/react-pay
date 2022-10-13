@@ -84,6 +84,13 @@
           border-color: rgba(104, 72, 253, 0.2);
         }
       }
+      li:first-child{
+        .inner-label{
+          sup{
+            right: -24px;
+          }
+        }
+      }
     }
     .last-inp {
       input {

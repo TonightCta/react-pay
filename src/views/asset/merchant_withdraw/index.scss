@@ -34,6 +34,7 @@
       ul {
         flex: 1;
         display: flex;
+        flex-wrap: wrap;
         li {
           padding: 14px 28px;
           border-radius: 4px;
@@ -44,6 +45,7 @@
           min-width: 160px;
           font-weight: 500;
           position: relative;
+          margin-bottom: 8px;
           .active-label {
             position: absolute;
             bottom: -4px;
@@ -108,14 +110,13 @@
       }
       .inp-address {
         border-radius: 4px;
-        border: 1px solid #ff6871;
+        border: 1px solid #ccc;
         transition: 0.3s all;
         display: flex;
         align-items: center;
         input {
           border: 0;
           width: 200px;
-          color: #f47272;
           outline: none;
         }
         input:focus {
@@ -165,6 +166,12 @@
               margin-left: 12px;
             }
           }
+        }
+      }
+      .faile-inp{
+        border-color: #ff6871;
+        input{
+          color: #f47272;
         }
       }
     }
@@ -225,7 +232,7 @@
       position: absolute;
       width: 100%;
       left: 0;
-      top: 52px;
+      top: 42px;
       z-index: 20;
     }
     .msg-inner {

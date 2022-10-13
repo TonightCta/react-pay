@@ -1,3 +1,8 @@
+import { MerchantInfoApi } from "../request/api";
+import { Type } from "./interface";
+import { useContext } from 'react';
+import { IBPay } from '../App';
+
 //邮箱格式校验
 export const CheckEmail = (arg: string): boolean => {
     const rule = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
@@ -14,4 +19,4 @@ export const DateConvert = (_time: number): string => {
     // const min = date.getMinutes() >= 10 ? date.getMinutes() : '0' + date.getMinutes();
     // const sec = date.getSeconds() >= 10 ? date.getSeconds() : '0' + date.getSeconds();
     return `${year}-${month}-${day}`
-}
+};

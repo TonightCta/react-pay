@@ -209,12 +209,28 @@
       }
     }
   }
- 
 }
-.ant-popconfirm{
-  .ant-popover-content{
-    .ant-popover-inner{
-      padding: 12px!important;
+.ant-popconfirm {
+  .ant-popover-content {
+    .ant-popover-inner {
+      padding: 12px !important;
     }
+  }
+}
+.edit-merchant-2 {
+  padding: 32px 30px 40px;
+  .edit-inp {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    input {
+      height: 44px;
+      border-radius: 4px;
+      background-color: #faf8ff;
+      border-color: rgba(104, 72, 253, 0.2);
+    }
+  }
+  .edit-inp:last-child{
+    margin-bottom: 0;
   }
 }

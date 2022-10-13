@@ -1,5 +1,9 @@
-import { useRef, useState, useCallback, useEffect } from "react"
+import { useRef, useState, useCallback, useEffect, useContext } from "react"
+import { IBPay } from '../App';
+import { MerchantInfoApi } from '../request/api'
+import { Type } from "./interface";
 
+//倒计时
 export const useCountdown = (propsCount: number, callback = () => { }) => {
     const [count, setCount] = useState(propsCount)
     const timer = useRef<NodeJS.Timer>();
@@ -31,3 +35,21 @@ export const useCountdown = (propsCount: number, callback = () => { }) => {
         startTimer,
     }
 };
+//更新用户信息
+export const useInfo = () => {
+    const { dispatch } = useContext(IBPay);
+    const up = async () => {
+        const result = await MerchantInfoApi({});
+        const { data } = result;
+        dispatch({
+            type: Type.SET_ACCOUNT,
+            payload: {
+                account: JSON.stringify(data)
+            }
+        });
+    };
+    return {
+        upUserInfo:up
+    }
+
+}

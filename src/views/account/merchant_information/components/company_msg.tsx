@@ -1,15 +1,47 @@
 
-import { Button } from 'antd';
-import { ReactElement, ReactNode, useState } from 'react';
+import { Button, message } from 'antd';
+import copy from 'copy-to-clipboard';
+import { ReactElement, ReactNode, useState, useEffect } from 'react';
 import GetKey from './get_key';
 import SetWhite from './set_white';
+import { GetNetworkIP,QueryMerchantApi } from '../../../../request/api'
 
 
-const CompanyMsg = (): ReactElement<ReactNode> => {
+const CompanyMsg = (props:{account:string}): ReactElement<ReactNode> => {
     const [boxModal,setBoxModal] = useState<{key:boolean,white:boolean}>({
         key:false,
         white:false
-    })
+    });
+    // 白名单地址
+    const [whiteIP,setWhiteIP] = useState<string>('');
+    const [account,setAcount] = useState<{
+        name:string,
+        email:string,
+        mch_id:string
+    }>({
+        name:'',
+        email:'',
+        mch_id:''
+    });
+    const [netIP,setNetIP] = useState<string>(''); 
+    useEffect(() => {
+        QueryNetIp();
+        const account = JSON.parse(props.account || '{}');
+        setAcount(account.merchantInfo);
+        return () => {
+            setNetIP('');
+        }
+    },[]);
+    const QueryNetIp = async (_type?:number) => {
+        const info = await QueryMerchantApi({});
+        setWhiteIP(info.data.ip_list[0] || '');
+        if(_type){
+            return
+        }
+        const result = await GetNetworkIP({});
+        const { data } = result;
+        setNetIP(data.gatewayList[0].url);
+    };
     return (
         <div className='company-msg'>
             <div className='msg-public merchant-msg'>
@@ -21,10 +53,10 @@ const CompanyMsg = (): ReactElement<ReactNode> => {
                     <li>商户邮箱</li>
                 </ul>
                 <ul>
-                    <li>ceshi2022@ib.cc</li>
-                    <li>ceshi2022@ib.cc</li>
+                    <li>{account.name}</li>
+                    <li>{account.email}</li>
                     <li>-</li>
-                    <li>ceshi2022@ib.cc</li>
+                    <li>{account.email}</li>
                 </ul>
             </div>
             <div className='msg-public butt-msg'>
@@ -40,15 +72,21 @@ const CompanyMsg = (): ReactElement<ReactNode> => {
                 </ul>
                 <ul>
                     <li>
-                        <p>bYPhrixkgRX2KjJ4QJUp083v</p>
+                        <p>{account.mch_id}</p>
                         <p>
-                            <Button type='primary' size='small'>复制</Button>
+                            <Button type='primary' size='small' onClick={() => {
+                                copy(account.mch_id);
+                                message.success('复制成功');
+                            }}>复制</Button>
                         </p>
                     </li>
                     <li>
-                        <p>https://merchant.ib.cc</p>
+                        <p>{netIP}</p>
                         <p>
-                            <Button type='primary' size='small'>复制</Button>
+                            <Button type='primary' size='small' onClick={() => {
+                                copy(netIP)
+                                message.success('复制成功');
+                            }}>复制</Button>
                         </p>
                     </li>
                     <li>
@@ -63,19 +101,19 @@ const CompanyMsg = (): ReactElement<ReactNode> => {
                         </p>
                     </li>
                     <li>
-                        <p>-</p>
+                        <p>{whiteIP ? whiteIP : '-'}</p>
                         <p>
                             <Button type='primary' size='small' onClick={() => {
                                 setBoxModal({
                                     ...boxModal,
                                     white:true
                                 })
-                            }}>设置</Button>
+                            }}>{whiteIP ? '修改' : '设置'}</Button>
                         </p>
                     </li>
                 </ul>
             </div>
-            <div className='msg-public auth-msg'>
+            {/* <div className='msg-public auth-msg'>
                 <p className='msg-title'>企业认证</p>
                 <ul className='table-title'>
                     <li>企业注册国家</li>
@@ -93,16 +131,18 @@ const CompanyMsg = (): ReactElement<ReactNode> => {
                     <li>-</li>
                     <li>-</li>
                 </ul>
-            </div>
+            </div> */}
             {/* 获取API KEY */}
-            <GetKey value={boxModal.key} resetModal={(val:boolean) : void => {
+            <GetKey value={boxModal.key} email={account.email} resetModal={(val:boolean) : void => {
                 setBoxModal({
                     ...boxModal,
                     key:val
                 })
             }}/>
             {/* 设置白名单地址 */}
-            <SetWhite value={boxModal.white} resetModal={(val:boolean) : void => {
+            <SetWhite value={boxModal.white} now={whiteIP} reloadIP={() => {
+                QueryNetIp(123)
+            }} resetModal={(val:boolean) : void => {
                 setBoxModal({
                     ...boxModal,
                     white:val

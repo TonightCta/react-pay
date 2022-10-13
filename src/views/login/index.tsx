@@ -99,7 +99,7 @@ const LoginIndex = (): ReactElement<ReactNode> => {
             payload: {
                 merchant_id: info.data.merchantInfo.mch_id
             }
-        })
+        });
         dispatch({
             type: Type.SET_ACCOUNT,
             payload: {
