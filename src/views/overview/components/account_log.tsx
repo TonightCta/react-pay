@@ -1,12 +1,30 @@
 
-import { Button, Popover } from 'antd';
-import { ReactElement, useState, useContext } from 'react';
+import { Button, Popover, message } from 'antd';
+import { ReactElement, useState, useContext, useRef, RefObject } from 'react';
 import BalanceCard from './balance_card';
 import LoginLog from './login_log';
 import SettlementBox from './settlement_box';
 import { IBPay } from '../../../App';
 import { useEffect } from 'react';
 import { Type } from '../../../utils/interface';
+import LoadingView from './loading';
+import { CheckProfitApi,CheckBalanceApi } from '../../../request/api';
+import { useNavigate } from 'react-router-dom';
+
+export interface Profit{
+    trx:number,
+    usdt:number,
+    mch_id:string
+}
+
+export interface Balance{
+    trx:number,
+    trx2:number,
+    usdt:number,
+    mch_id:string
+}
+
+type HTML = any;
 
 
 interface Account {
@@ -29,18 +47,25 @@ const sourceAccount: Account = {
 
 const AccountLog = (): ReactElement => {
     const { state, dispatch } = useContext(IBPay);
-    // const merchant: string[] = ['s9756382730@outlook.com', 's9756382730@outlook.com', 's9756382730@outlook.com'];
+    //商家列表
     const [merchantList, setMerchantList] = useState<any[]>([]);
+    //商户信息
     const [account, setAccount] = useState<Account>(sourceAccount);
+    //admin view merchant info
     const [selectAccount, setSelecyAccount] = useState<Account>(sourceAccount);
     useEffect(() => {
         setMerchantList(state.merchant_list as []);
         setAccount(JSON.parse(state.account || '{}')?.merchantInfo);
         setSelecyAccount(JSON.parse(state.other_merchant || '{}'));
     }, [state.merchant_list]);
-    const [visible, setVisible] = useState<boolean>(false);
-    const [boxType, setBoxType] = useState<number>(1);
+    //选择商家
     const [selectMerchantPopup, setSelectMerchantPopup] = useState<boolean>(false);
+    //利润清算 & 余额提取
+    const [visible, setVisible] = useState<boolean>(false);
+    //操作类型
+    const [boxType, setBoxType] = useState<number>(1);
+    //查询检查
+    const [query, setQuery] = useState<boolean>(false);
     const SelectMerchant = (): ReactElement => {
         return (
             <div className='select-merchant'>
@@ -52,9 +77,9 @@ const AccountLog = (): ReactElement => {
                                     setSelectMerchantPopup(false);
                                     setSelecyAccount(item.mch_id === account.mch_id ? sourceAccount : item)
                                     dispatch({
-                                        type:Type.SET_OTHER_MERCHANT,
-                                        payload:{
-                                            other_merchant:JSON.stringify(item.mch_id === account.mch_id ? sourceAccount : item)
+                                        type: Type.SET_OTHER_MERCHANT,
+                                        payload: {
+                                            other_merchant: JSON.stringify(item.mch_id === account.mch_id ? sourceAccount : item)
                                         }
                                     });
                                     dispatch({
@@ -70,10 +95,26 @@ const AccountLog = (): ReactElement => {
                 </ul>
             </div>
         )
-    }
+    };
+    //利润信息
+    const [settleMsg,setSettleMsg] = useState<Profit>({
+        trx:0,
+        usdt:0,
+        mch_id:'',
+    });
+    //余额信息
+    const [balanceMsg,setBalanceMsg] = useState<Balance>({
+        trx:0,
+        trx2:0,
+        usdt:0,
+        mch_id:'',
+    });
     const handleOpenChange = (newOpen: boolean) => {
         setSelectMerchantPopup(newOpen);
     };
+
+    const balanceCard : RefObject<HTML> = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
     return (
         <div className='account-log'>
             {/* 账户信息概览 */}
@@ -94,26 +135,63 @@ const AccountLog = (): ReactElement => {
                 </div>
             </div>
             {/* 账户操作 */}
-            <div className='bind-msg'>
-                <div className='auth-btn'>
-                    <p>
+            {account.is_admin && <div className='bind-msg'>
+                <div className={`auth-btn ${account.ga === 1 ? 'has-bind' : ''}`}>
+                    <p onClick={ account.ga === 0 ? () => {
+                        navigate('/account/merchant-information')
+                    } : () => {}}>
                         {
-                            (selectAccount.ga ? selectAccount.ga : account.ga) === 0 ? '未绑定' : '已绑定'
+                            account.ga === 0 ? '未绑定' : '已绑定'
                         }
                     </p>
                 </div>
                 <p className='mask-line'></p>
                 <div className='oper-box-btn'>
-                    <Button type="default" className='oper-btn' onClick={() => {
+                    <Button type="default" className='oper-btn' onClick={async () => {
+                        setQuery(true);
+                        const result = await CheckProfitApi({
+                            mchId:selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
+                        });
+                        const { code,data } = result;
+                        setQuery(false);
+                        if(code !== 200){
+                            message.error(result.message);
+                            return
+                        }
+                        if(!data.needCheckout){
+                            message.error(`最少结算数量为 ${data.minUsdtProfit} USDT`);
+                            return
+                        };
+                        setSettleMsg({
+                            trx:data.trxProfit,
+                            usdt:data.usdtProfit,
+                            mch_id:selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
+                        });
                         setBoxType(1)
                         setVisible(true)
                     }}>利润结算</Button>
-                    <Button type="default" className='oper-btn' onClick={() => {
+                    <Button type="default" className='oper-btn' onClick={async () => {
+                        setQuery(true);
+                        const result = await CheckBalanceApi({
+                            mchId:selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
+                        });
+                        const { code,data } = result;
+                        setQuery(false);
+                        if(code !== 200){
+                            message.error(result.message);
+                            return
+                        }
+                        setBalanceMsg({
+                            trx:data.mchFeeAvailableTotal,
+                            trx2:data.userFeeAvailableTotal,
+                            usdt:data.mchAvailableTotal,
+                            mch_id:selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
+                        });
                         setBoxType(2)
                         setVisible(true)
                     }}>提取余额</Button>
                 </div>
-            </div>
+            </div>}
             {/* 账户信息 */}
             <div className='account-card-msg'>
                 <ul>
@@ -132,13 +210,17 @@ const AccountLog = (): ReactElement => {
                 </ul>
             </div>
             {/* 余额信息 */}
-            <BalanceCard />
+            <BalanceCard ref={balanceCard}/>
             {/* 登录日志 */}
             <LoginLog />
             {/* 利润结算 */}
-            <SettlementBox value={visible} type={boxType} resetModal={(val: boolean): void => {
+            <SettlementBox reloadBalance={() => {
+                balanceCard.current.upBalance();
+            }} value={visible} profit={settleMsg} balance={balanceMsg} type={boxType} resetModal={(val: boolean): void => {
                 setVisible(false)
             }} />
+            {/* 加载 */}
+            {query && <LoadingView />}
         </div>
     )
 };

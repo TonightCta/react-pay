@@ -6,6 +6,69 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "32218571",
+      "name": "编组 55 2",
+      "font_class": "a-bianzu5521",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "32218573",
+      "name": "编组 55 3",
+      "font_class": "a-bianzu5531",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "32218574",
+      "name": "编组 55 4",
+      "font_class": "a-bianzu5541",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "32218575",
+      "name": "编组 55",
+      "font_class": "a-bianzu55",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "32218718",
+      "name": "编组 55",
+      "font_class": "a-bianzu551",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "32217774",
+      "name": "形状 2",
+      "font_class": "a-xingzhuang2",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "32217775",
+      "name": "bianji-2 2",
+      "font_class": "a-bianji-22",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "32217238",
+      "name": "路径 2",
+      "font_class": "a-lujing2",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "32217075",
+      "name": "A备份 2",
+      "font_class": "a-Abeifen2",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
       "icon_id": "15838460",
       "name": "direction-right",
       "font_class": "direction-right",

@@ -1,6 +1,6 @@
 
 import { Popover, Tooltip } from 'antd';
-import { ReactElement, useEffect, useState, useContext } from 'react';
+import React,{ ReactElement, useEffect, useState, useContext,forwardRef,useImperativeHandle } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { WalletViewApi } from '../../../request/api';
 import { IBPay } from '../../../App';
@@ -93,7 +93,7 @@ const source: Balance[] = [
     },
 ]
 
-const BalanceCard = (): ReactElement => {
+const BalanceCard = React.forwardRef((props,ref) => {
     const [list, setList] = useState<Balance[]>(source);
     const { state } = useContext(IBPay);
     const navigate = useNavigate();
@@ -102,9 +102,14 @@ const BalanceCard = (): ReactElement => {
             setList(source)
         }
     }, []);
+
     useEffect(() => {
         walletViewService();
-    },[state.merchant_id])
+    },[state.merchant_id]);
+    //发射方法
+    useImperativeHandle(ref,() => ({
+        upBalance:walletViewService
+    }));
     const walletViewService = async () => {
         const { merchant_id } = state;
         const reuslt = await WalletViewApi({
@@ -187,6 +192,6 @@ const BalanceCard = (): ReactElement => {
             </ul>
         </div>
     )
-};
+});
 
 export default BalanceCard;

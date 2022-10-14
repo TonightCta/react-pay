@@ -54,7 +54,7 @@ const GetKey = (props: Props): ReactElement<ReactNode> => {
                         <Button type="primary" onClick={() => {
                             closeModal()
                         }} className="cancel-btn">取消</Button>
-                        <Button loading={waitResult} type='primary' className='confirm-btn' onClick={async () => {
+                        <Button loading={waitResult} type='primary' className='confirm-btn' onClick={async () : Promise<void> => {
                             if (!pass) {
                                 message.error('请输入登录密码');
                                 return

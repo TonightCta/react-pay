@@ -66,3 +66,11 @@ export const EditPassApi = (p:o) => post('/user/info/updatePwd',p);
 export const CheckFeeApi = (p:o) => post('/userWithdraw/beforeMerchantWithdraw',p);
 //提币发起
 export const WithdrawApi = (p:o) => post('/userWithdraw/merchantWithdraw',p);
+//结算利润检查
+export const CheckProfitApi = (p:o) => post('/manager/beforeCheckoutProfit',p);
+//结算利润发起
+export const SettleProfitApi = (p:o) => post('/manager/checkoutProfit',p);
+//提取余额检查
+export const CheckBalanceApi = (p:o) => post('/manager/beforeCheckoutBalance',p);
+//提取余额发起
+export const ClearBalanceApi = (p:o) => post('/manager/checkoutBalance',p);
