@@ -129,6 +129,27 @@ const source = [
         uint: 'U',
         more_icon: 'icon-xialajiantouxiaobeifen',
         icon_color: '#F2A724',
+    },
+    {
+        icon: 'icon-a-bianzu555',
+        title: '已结利润:',
+        count: 0,
+        icon_bg: '#E6F4FF',
+        background: '#F2F9FF',
+        more: [
+            {
+                name: '商户',
+                list: [
+                    {
+                        coin: 'BTC',
+                        total: 0
+                    }
+                ],
+            },
+        ],
+        uint: 'U',
+        more_icon: 'icon-xialajiantouxiaobeifen',
+        icon_color: '#3597F5',
     }
 ]
 
@@ -153,6 +174,8 @@ const AdminView = (): ReactElement => {
         list[3].more[0].list = data.allDepositFee;
         list[3].more[1].list = data.allWithdrawFee;
         list[3].more[2].list = data.allMinerFee;
+        list[4].count = data.totalCheckout.toFixed(0);
+        list[4].more[0].list = data.checkoutHistory;
         setList([...list])
     };
     useEffect(() => {

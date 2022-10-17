@@ -209,13 +209,16 @@
     }
   }
   .ant-popover-inner {
-    background-color: rgba(255, 255, 255, 0.15);
-    backdrop-filter: saturate(90%) blur(10px);
+    // background-color: rgba(255, 255, 255, 0.15);
+    // backdrop-filter: saturate(90%) blur(10px);
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 4px;
     overflow: hidden;
     .ant-popover-inner-content {
       padding: 0;
       .popver-content {
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(4px);
         ul {
           li {
             padding: 12px 30px;
@@ -229,6 +232,19 @@
           }
           li:hover {
             background-color: #9681ff;
+          }
+        }
+      }
+      .with-bg {
+        background: #F4F2FF;
+        ul {
+          li {
+            p {
+              color: #7256f8;
+            }
+          }
+          li:hover {
+            background: #E8E2FF;
           }
         }
       }
@@ -303,28 +319,28 @@
   transform: translateY(7px);
 }
 .login-out-inner {
-  .modal-header-mine{
-    padding: 20px 30px 12px;  
-    background: linear-gradient(180deg, #F5F7FF 0%, #FFFFFF 100%);
+  .modal-header-mine {
+    padding: 20px 30px 12px;
+    background: linear-gradient(180deg, #f5f7ff 0%, #ffffff 100%);
     border-radius: 4px;
   }
   .out-inner {
     padding: 20px 0 26px 0;
     text-align: center;
-    p:first-child{
+    p:first-child {
       font-size: 24px;
       color: #333;
       font-weight: 500;
     }
-    p:last-child{
+    p:last-child {
       margin-top: 10px;
       font-size: 18px;
       color: #666;
     }
   }
-  .modal-footer-mine{
+  .modal-footer-mine {
     text-align: center;
-    button:first-child{
+    button:first-child {
       margin-left: 0;
     }
   }

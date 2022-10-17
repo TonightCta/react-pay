@@ -16,15 +16,17 @@ interface RouteMine {
     icon: string,
     url: string,
     name: string,
+    popup: boolean,
     children: RouteInnder[]
 };
 
-const Route: RouteMine[] = [
+const sourceRoute: RouteMine[] = [
     {
         //概览
         icon: 'icon-gailan',
         url: '/',
         name: '首页',
+        popup: false,
         children: [
             {
                 name: '概览',
@@ -37,6 +39,7 @@ const Route: RouteMine[] = [
         icon: 'icon-dingdanguanli',
         url: '/order',
         name: '订单管理',
+        popup: false,
         children: [
             {
                 name: '用户充币订单',
@@ -61,6 +64,7 @@ const Route: RouteMine[] = [
         icon: 'icon-a-gongzuotai3',
         url: '/asset',
         name: '资金管理',
+        popup: false,
         children: [
             {
                 name: '商家充币',
@@ -81,6 +85,7 @@ const Route: RouteMine[] = [
         icon: 'icon-gongzuotai',
         url: '/account',
         name: '账户管理',
+        popup: false,
         children: [
             {
                 name: '商家列表',
@@ -97,12 +102,13 @@ const Route: RouteMine[] = [
         ]
     }
 ]
-const Menu = (): ReactElement<ReactNode> => {
+const Menu = (props: { menuStatus: number }): ReactElement<ReactNode> => {
     //选中效果
     const [active, setActive] = useState<{ levelOne: number, levelTwo: number }>({
         levelOne: 0,
         levelTwo: 0
     });
+    const [Route, setRoute] = useState<RouteMine[]>(sourceRoute);
     //编辑密码操作
     const [editPassBox, setEditPassBox] = useState<{ visible: boolean, type: number }>({
         visible: false,
@@ -207,14 +213,37 @@ const Menu = (): ReactElement<ReactNode> => {
         }, 100)
     }, [location]);
 
-    const [visible,setVisible] = useState<boolean>(false);
+    const [visible, setVisible] = useState<boolean>(false);
     //工具栏路由信息
     const [toolRoute, setToolRoute] = useState<string>('首页');
     const { dispatch } = useContext(IBPay);
+    const setLovelOne = (e: any, item: RouteMine, index: number, url?: string) => {
+        setToolRoute(item.name);
+        const msg = {
+            level_one: item.name,
+            level_two: item.children[0].name
+        };
+        dispatch({
+            type: Type.SET_ROUTE_NAME,
+            payload: {
+                routeMsg: JSON.stringify(msg)
+            }
+        })
+        setLevelTwoMenu(item.children);
+        levelTwoDOM.current.style.top = `${e.target.getBoundingClientRect().top}px`
+        levelTwoDOM.current.style.opacity = 1;
+        if (!url) {
+            setActive({
+                ...active,
+                levelOne: index
+            });
+            navigate(item.url);
+        }
+    }
     //账户操作
     const PopverContent = (): ReactElement => {
         return (
-            <div className='popver-content'>
+            <div className={`popver-content ${props.menuStatus === 0 ? 'with-bg' : ''}`}>
                 <ul>
                     <li onClick={() => {
                         setEditPassBox({
@@ -243,6 +272,47 @@ const Menu = (): ReactElement<ReactNode> => {
                 </ul>
             </div>
         )
+    };
+    const updatePopup = (_val: boolean, _index: number) => {
+        const route: RouteMine[] = sourceRoute;
+        route[_index].popup = _val;
+        setRoute([...route]);
+    }
+    //提示菜单
+    const MenuPopver = (props: { _index: number }): ReactElement => {
+        return (
+            <div className='popver-content with-bg'>
+                <ul>
+                    {
+                        levelTwoMenu.map((item: RouteInnder, index: number): ReactElement => {
+                            return (
+                                <li key={index} className={`${active.levelTwo === index && 'active-menu-two'}`} onClick={() => {
+                                    setActive({
+                                        levelOne: props._index,
+                                        levelTwo: index
+                                    });
+                                    const msg = {
+                                        level_one: toolRoute,
+                                        level_two: item.name
+                                    }
+                                    dispatch({
+                                        type: Type.SET_ROUTE_NAME,
+                                        payload: {
+                                            routeMsg: JSON.stringify(msg)
+                                        }
+                                    });
+                                    navigate(item.url);
+                                    updatePopup(false, props._index)
+                                }}>
+                                    <p>{item.name}</p>
+                                    <div className='active-mask'></div>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </div>
+        )
     }
     return (
         <div className='menu-inner'>
@@ -253,29 +323,23 @@ const Menu = (): ReactElement<ReactNode> => {
                         {
                             Route.map((item: RouteMine, index: number): ReactElement => {
                                 return (
-                                    <li key={index} className={`${active.levelOne === index && 'active-menu-one'}`} onClick={(e: any) => {
-                                        setActive({
-                                            ...active,
-                                            levelOne: index
-                                        });
-                                        setToolRoute(item.name);
-                                        const msg = {
-                                            level_one: item.name,
-                                            level_two: item.children[0].name
-                                        };
-                                        dispatch({
-                                            type: Type.SET_ROUTE_NAME,
-                                            payload: {
-                                                routeMsg: JSON.stringify(msg)
-                                            }
-                                        })
-                                        setLevelTwoMenu(item.children)
-                                        navigate(item.url);
-                                        levelTwoDOM.current.style.top = `${e.target.getBoundingClientRect().top}px`
-                                        levelTwoDOM.current.style.opacity = 1;
-                                    }}>
-                                        <p className={`iconfont ${item.icon}`}></p>
-                                    </li>
+                                    <>
+                                        {
+                                            props.menuStatus === 1
+                                                ? <li title={item.name} key={index} className={`${active.levelOne === index && 'active-menu-one'}`} onClick={(e: any) => {
+                                                    setLovelOne(e, item, index)
+                                                }}>
+                                                    <p className={`iconfont ${item.icon}`}></p>
+                                                </li>
+                                                : <Popover open={item.popup} key={index} onOpenChange={(val: boolean) => { updatePopup(val, index) }} className='test-prop' placement='right' content={<MenuPopver _index={index} />} trigger="click">
+                                                    <li title={item.name} key={index} className={`${active.levelOne === index && 'active-menu-one'}`} onClick={(e: any) => {
+                                                        setLovelOne(e, item, index, 'test');
+                                                    }}>
+                                                        <p className={`iconfont ${item.icon}`}></p>
+                                                    </li>
+                                                </Popover>
+                                        }
+                                    </>
                                 )
                             })
                         }
@@ -329,16 +393,16 @@ const Menu = (): ReactElement<ReactNode> => {
                 </ul>
             </div>
             {/* 编辑密码 */}
-            <EditPassword value={editPassBox.visible} type={editPassBox.type} resetClose={(val:boolean) : void => {
+            <EditPassword value={editPassBox.visible} type={editPassBox.type} resetClose={(val: boolean): void => {
                 setEditPassBox({
                     ...editPassBox,
-                    visible:val
+                    visible: val
                 })
-            }}/>
+            }} />
             {/* 退出登录 */}
-            <LoginOut value={visible} resetModal={(val:boolean) => {
+            <LoginOut value={visible} resetModal={(val: boolean) => {
                 setVisible(val)
-            }}/>
+            }} />
         </div>
     )
 };

@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3667666 */
-  src: url('iconfont.woff2?t=1665718781239') format('woff2'),
-       url('iconfont.woff?t=1665718781239') format('woff'),
-       url('iconfont.ttf?t=1665718781239') format('truetype');
+  src: url('iconfont.woff2?t=1665989730111') format('woff2'),
+       url('iconfont.woff?t=1665989730111') format('woff'),
+       url('iconfont.ttf?t=1665989730111') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-a-bianzu555:before {
+  content: "\e646";
 }
 
 .icon-a-bianzu5521:before {

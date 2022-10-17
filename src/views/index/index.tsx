@@ -13,7 +13,7 @@ const IndexView = (): ReactElement<ReactNode> => {
     return (
         <div className={`index-view ${menuStatus === 0 ? 'hidden-view-menu' : ''}`}>
             <div className='left-menu'>
-                <Menu />
+                <Menu menuStatus={menuStatus}/>
             </div>
             <div className='right-view'>
                 <div className='view-tool-box'>

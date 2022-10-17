@@ -8,20 +8,20 @@ import { IBPay } from '../../../App';
 import { useEffect } from 'react';
 import { Type } from '../../../utils/interface';
 import LoadingView from './loading';
-import { CheckProfitApi,CheckBalanceApi } from '../../../request/api';
+import { CheckProfitApi, CheckBalanceApi } from '../../../request/api';
 import { useNavigate } from 'react-router-dom';
 
-export interface Profit{
-    trx:number,
-    usdt:number,
-    mch_id:string
+export interface Profit {
+    trx: number,
+    usdt: number,
+    mch_id: string
 }
 
-export interface Balance{
-    trx:number,
-    trx2:number,
-    usdt:number,
-    mch_id:string
+export interface Balance {
+    trx: number,
+    trx2: number,
+    usdt: number,
+    mch_id: string
 }
 
 type HTML = any;
@@ -97,39 +97,40 @@ const AccountLog = (): ReactElement => {
         )
     };
     //利润信息
-    const [settleMsg,setSettleMsg] = useState<Profit>({
-        trx:0,
-        usdt:0,
-        mch_id:'',
+    const [settleMsg, setSettleMsg] = useState<Profit>({
+        trx: 0,
+        usdt: 0,
+        mch_id: '',
     });
     //余额信息
-    const [balanceMsg,setBalanceMsg] = useState<Balance>({
-        trx:0,
-        trx2:0,
-        usdt:0,
-        mch_id:'',
+    const [balanceMsg, setBalanceMsg] = useState<Balance>({
+        trx: 0,
+        trx2: 0,
+        usdt: 0,
+        mch_id: '',
     });
     const handleOpenChange = (newOpen: boolean) => {
         setSelectMerchantPopup(newOpen);
     };
 
-    const balanceCard : RefObject<HTML> = useRef<HTMLDivElement>(null);
+    const balanceCard: RefObject<HTML> = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
     return (
         <div className='account-log'>
             {/* 账户信息概览 */}
             <div className='account-card'>
                 <div className='avatar-box'>
-                    <img src={require('../../../assets/images/test.png')} alt="" />
+                    <img src={require('../../../assets/images/test.png')} alt="test" />
                 </div>
-                <div className='name-msg'>
-                    <p className='account-name'>{selectAccount.name ? selectAccount.name : account.name}</p>
-                    <Popover placement="bottomRight" onOpenChange={handleOpenChange} open={selectMerchantPopup} arrowPointAtCenter content={<SelectMerchant />} trigger="hover">
+                <Popover placement="bottomRight" onOpenChange={handleOpenChange} open={selectMerchantPopup} content={<SelectMerchant />} trigger="hover">
+                    <div className='name-msg'>
+                        <p className='account-name'>{selectAccount.name ? selectAccount.name : account.name}</p>
+
                         <div className='view-other-account'>
                             <p className='iconfont icon-xiala'></p>
                         </div>
-                    </Popover>
-                </div>
+                    </div>
+                </Popover>
                 <div className='bg-shadow'>
                     <img src={require('../../../assets/images/box_shadow.png')} alt="" />
                 </div>
@@ -137,9 +138,9 @@ const AccountLog = (): ReactElement => {
             {/* 账户操作 */}
             {account.is_admin && <div className='bind-msg'>
                 <div className={`auth-btn ${account.ga === 1 ? 'has-bind' : ''}`}>
-                    <p onClick={ account.ga === 0 ? () => {
+                    <p onClick={account.ga === 0 ? () => {
                         navigate('/account/merchant-information')
-                    } : () => {}}>
+                    } : () => { }}>
                         {
                             account.ga === 0 ? '未绑定' : '已绑定'
                         }
@@ -150,22 +151,22 @@ const AccountLog = (): ReactElement => {
                     <Button type="default" className='oper-btn' onClick={async () => {
                         setQuery(true);
                         const result = await CheckProfitApi({
-                            mchId:selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
+                            mchId: selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
                         });
-                        const { code,data } = result;
+                        const { code, data } = result;
                         setQuery(false);
-                        if(code !== 200){
+                        if (code !== 200) {
                             message.error(result.message);
                             return
                         }
-                        if(!data.needCheckout){
+                        if (!data.needCheckout) {
                             message.error(`最少结算数量为 ${data.minUsdtProfit} USDT`);
                             return
                         };
                         setSettleMsg({
-                            trx:data.trxProfit,
-                            usdt:data.usdtProfit,
-                            mch_id:selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
+                            trx: data.trxProfit,
+                            usdt: data.usdtProfit,
+                            mch_id: selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
                         });
                         setBoxType(1)
                         setVisible(true)
@@ -173,19 +174,19 @@ const AccountLog = (): ReactElement => {
                     <Button type="default" className='oper-btn' onClick={async () => {
                         setQuery(true);
                         const result = await CheckBalanceApi({
-                            mchId:selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
+                            mchId: selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
                         });
-                        const { code,data } = result;
+                        const { code, data } = result;
                         setQuery(false);
-                        if(code !== 200){
+                        if (code !== 200) {
                             message.error(result.message);
                             return
                         }
                         setBalanceMsg({
-                            trx:data.mchFeeAvailableTotal,
-                            trx2:data.userFeeAvailableTotal,
-                            usdt:data.mchAvailableTotal,
-                            mch_id:selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
+                            trx: data.mchFeeAvailableTotal,
+                            trx2: data.userFeeAvailableTotal,
+                            usdt: data.mchAvailableTotal,
+                            mch_id: selectAccount.mch_id ? selectAccount.mch_id : account.mch_id
                         });
                         setBoxType(2)
                         setVisible(true)
@@ -210,7 +211,7 @@ const AccountLog = (): ReactElement => {
                 </ul>
             </div>
             {/* 余额信息 */}
-            <BalanceCard ref={balanceCard}/>
+            <BalanceCard ref={balanceCard} />
             {/* 登录日志 */}
             <LoginLog />
             {/* 利润结算 */}

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "32329466",
+      "name": "编组 55",
+      "font_class": "a-bianzu555",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
       "icon_id": "32218571",
       "name": "编组 55 2",
       "font_class": "a-bianzu5521",
