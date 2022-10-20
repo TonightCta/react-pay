@@ -11,6 +11,9 @@ const { Option } = Select;
 
 interface Data {
     mch_id: string,
+    merchant:{
+        name:string
+    },
     address: string,
     coin: string,
     is_self: number,
@@ -22,8 +25,11 @@ interface Data {
 const columns: ColumnsType<Data> = [
     {
         title: '商户',
-        dataIndex: 'mch_id',
-        key: 'mch_id',
+        dataIndex: 'merchant',
+        key: 'merchant',
+        render:(_,{ merchant }) => (
+            <p>{merchant ? merchant.name : '-'}</p>
+        )
     },
     {
         title: '地址',
@@ -157,7 +163,6 @@ const AddressesList = (): ReactElement<ReactNode> => {
             Object.assign(e, { key: String(i + 1) })
         })
         setDateSource(data.list);
-        console.log(data.list);
     };
     //页码变化
     const pageChange = (page: number, size: number) => {

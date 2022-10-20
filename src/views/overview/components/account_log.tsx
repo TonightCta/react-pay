@@ -122,15 +122,14 @@ const AccountLog = (): ReactElement => {
                 <div className='avatar-box'>
                     <img src={require('../../../assets/images/test.png')} alt="test" />
                 </div>
-                <Popover placement="bottomRight" onOpenChange={handleOpenChange} open={selectMerchantPopup} content={<SelectMerchant />} trigger="hover">
-                    <div className='name-msg'>
-                        <p className='account-name'>{selectAccount.name ? selectAccount.name : account.name}</p>
-
+                <div className='name-msg'>
+                    <p className='account-name'>{selectAccount.name ? selectAccount.name : account.name}</p>
+                    {account.is_admin && <Popover placement="bottomRight" onOpenChange={handleOpenChange} arrowPointAtCenter open={selectMerchantPopup} content={<SelectMerchant />} trigger="hover">
                         <div className='view-other-account'>
                             <p className='iconfont icon-xiala'></p>
                         </div>
-                    </div>
-                </Popover>
+                    </Popover>}
+                </div>
                 <div className='bg-shadow'>
                     <img src={require('../../../assets/images/box_shadow.png')} alt="" />
                 </div>

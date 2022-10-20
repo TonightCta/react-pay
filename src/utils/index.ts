@@ -1,7 +1,3 @@
-import { MerchantInfoApi } from "../request/api";
-import { Type } from "./interface";
-import { useContext } from 'react';
-import { IBPay } from '../App';
 
 //邮箱格式校验
 export const CheckEmail = (arg: string): boolean => {
@@ -19,4 +15,15 @@ export const DateConvert = (_time: number): string => {
     // const min = date.getMinutes() >= 10 ? date.getMinutes() : '0' + date.getMinutes();
     // const sec = date.getSeconds() >= 10 ? date.getSeconds() : '0' + date.getSeconds();
     return `${year}-${month}-${day}`
+};
+//获取地址栏参数
+export const GetUrlKey = (name: string, url: string): string | null => {
+    return (
+        decodeURIComponent(
+            /* @ts-ignore */
+            (new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(
+                url
+            ) || [, ""])[1].replace(/\+/g, "%20")
+        ) || null
+    );
 };

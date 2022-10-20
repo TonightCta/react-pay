@@ -216,7 +216,7 @@ const Menu = (props: { menuStatus: number }): ReactElement<ReactNode> => {
     const [visible, setVisible] = useState<boolean>(false);
     //工具栏路由信息
     const [toolRoute, setToolRoute] = useState<string>('首页');
-    const { dispatch } = useContext(IBPay);
+    const { state, dispatch } = useContext(IBPay);
     const setLovelOne = (e: any, item: RouteMine, index: number, url?: string) => {
         setToolRoute(item.name);
         const msg = {
@@ -277,7 +277,18 @@ const Menu = (props: { menuStatus: number }): ReactElement<ReactNode> => {
         const route: RouteMine[] = sourceRoute;
         route[_index].popup = _val;
         setRoute([...route]);
-    }
+    };
+    useEffect(() => {
+        const { account } = state;
+        if (!JSON.parse(account || '{}')?.merchantInfo?.is_admin) {
+            const route: RouteMine[] = sourceRoute;
+            route[route.length - 1].children = [{
+                name: '商家信息',
+                url: '/account/merchant-information'
+            }];
+            setRoute([...route]);
+        }
+    }, [])
     //提示菜单
     const MenuPopver = (props: { _index: number }): ReactElement => {
         return (
@@ -323,7 +334,7 @@ const Menu = (props: { menuStatus: number }): ReactElement<ReactNode> => {
                         {
                             Route.map((item: RouteMine, index: number): ReactElement => {
                                 return (
-                                    <>
+                                    <div key={index}>
                                         {
                                             props.menuStatus === 1
                                                 ? <li title={item.name} key={index} className={`${active.levelOne === index && 'active-menu-one'}`} onClick={(e: any) => {
@@ -339,7 +350,7 @@ const Menu = (props: { menuStatus: number }): ReactElement<ReactNode> => {
                                                     </li>
                                                 </Popover>
                                         }
-                                    </>
+                                    </div>
                                 )
                             })
                         }

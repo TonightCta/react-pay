@@ -14,6 +14,9 @@ import AccountIndex from "./account";
 import MerchantConfig from "./account/merchant_config";
 import MerchantInformation from "./account/merchant_information";
 import MerchantList from "./account/merchant_list";
+import SiteIndex from "./site";
+import DemoIndex from "./demo";
+import DevelopmentIndex from "./development";
 
 export {
     LoginIndex,//登录
@@ -32,4 +35,7 @@ export {
     MerchantConfig,//商家配置
     MerchantInformation,//商家信息
     MerchantList,//商家列表
+    SiteIndex,//官网
+    DemoIndex,//demo
+    DevelopmentIndex,//开发者中心
 }

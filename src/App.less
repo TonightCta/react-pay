@@ -45,31 +45,114 @@ button {
     color: #333;
     font-weight: 500;
   }
-  .iconfont{
+  .iconfont {
     font-weight: 400;
     font-size: 16px;
     color: #999;
     cursor: pointer;
   }
 }
-.modal-footer-mine{
+.modal-footer-mine {
   padding: 30px;
   text-align: right;
   padding-top: 0;
-  button{
+  button {
     width: 142px;
     height: 40px;
     font-size: 14px;
     margin-left: 24px;
     border-radius: 4px;
   }
-  .cancel-btn{
+  .cancel-btn {
     background-color: white;
-    border: 1px solid #6848FD;
-    color: #6848FD;
+    border: 1px solid #6848fd;
+    color: #6848fd;
   }
 }
-.ant-btn-primary[disabled]{
+.ant-btn-primary[disabled] {
   background-color: #eee;
   border: 0;
+}
+
+.ant-popover {
+  z-index: 2000;
+}
+p {
+  line-height: 1;
+}
+.site-nav {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 78px;
+  border-bottom: 1px solid rgba(51, 66, 190, 0.1);
+  z-index: 300;
+  transition: 3s all;
+  background: rgba(255, 255, 255, 0.17);
+  backdrop-filter: blur(5px);
+  .nav-inner {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    img {
+      width: 166px;
+      height: 42px;
+      margin-right: 82px;
+    }
+    ul {
+      display: flex;
+      li {
+        margin-right: 76px;
+        font-size: 14px;
+        color: #4726cf;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      li:last-child {
+        margin-right: 44px;
+      }
+    }
+    .select-language::before {
+      content: "";
+      display: inline-block;
+      width: 1px;
+      height: 26px;
+      background-color: rgba(123, 129, 178, 0.17);
+      margin-right: 38px;
+    }
+    .select-language {
+      display: flex;
+      align-items: center;
+      .iconfont {
+        font-size: 24px;
+        cursor: pointer;
+        color: #4726cf;
+      }
+      .iconfont:first-child {
+        margin-right: 3px;
+      }
+    }
+    .login-box {
+      margin-left: 24px;
+      width: 88px;
+      height: 36px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid #3342be;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .iconfont {
+        font-size: 24px;
+        margin-right: 8px;
+      }
+      p {
+        font-size: 14px;
+        color: #4726cf;
+      }
+    }
+  }
 }

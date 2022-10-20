@@ -8,6 +8,7 @@ import { defaultState } from './reducer/index';
 import 'element-theme-default';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
+import SiteNav from './views/site/components/nav';
 moment.locale('zh-cn');
 
 
@@ -19,6 +20,7 @@ const App = (): ReactElement<ReactNode> => {
   return (
     <HashRouter>
       <div className="App">
+        <SiteNav/>
         <IBPay.Provider value={{state,dispatch}}>
           <RouterConfig />
         </IBPay.Provider>

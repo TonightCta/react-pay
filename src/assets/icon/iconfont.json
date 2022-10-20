@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "32382872",
+      "name": "earth-full",
+      "font_class": "earth-full",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "32382873",
+      "name": "earth-full (1)",
+      "font_class": "a-earth-full1",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
+      "icon_id": "32367132",
+      "name": "编组 40",
+      "font_class": "a-bianzu40",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "32367170",
+      "name": "xialajiantouxiao备份 3",
+      "font_class": "a-xialajiantouxiaobeifen3",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
+      "icon_id": "32352667",
+      "name": "编组 51",
+      "font_class": "a-bianzu51",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
       "icon_id": "32329466",
       "name": "编组 55",
       "font_class": "a-bianzu555",

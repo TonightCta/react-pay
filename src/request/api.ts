@@ -74,3 +74,5 @@ export const SettleProfitApi = (p:o) => post('/manager/checkoutProfit',p);
 export const CheckBalanceApi = (p:o) => post('/manager/beforeCheckoutBalance',p);
 //提取余额发起
 export const ClearBalanceApi = (p:o) => post('/manager/checkoutBalance',p);
+//自动登录
+export const AutoLoginApi = (p:o) => post('/user/login/v2/loginUserToken',p);

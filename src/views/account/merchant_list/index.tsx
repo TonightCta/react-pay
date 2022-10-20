@@ -23,16 +23,16 @@ interface Data {
     id: number
 }
 
-export interface EditMsg{
-    mch_id:string,
-    email:string,
-    name:string
+export interface EditMsg {
+    mch_id: string,
+    email: string,
+    name: string
 };
 
-export const editSource : EditMsg = {
-    mch_id:'',
-    email:'',
-    name:''
+export const editSource: EditMsg = {
+    mch_id: '',
+    email: '',
+    name: ''
 }
 
 
@@ -86,9 +86,9 @@ const MerchantList = (): ReactElement<ReactNode> => {
     //新增商户
     const [addBox, setAddbox] = useState<boolean>(false);
     //编辑商户
-    const [editBox,setEditBox] = useState<boolean>(false);
+    const [editBox, setEditBox] = useState<boolean>(false);
     //编辑信息
-    const [editMsg,setEditMsg] = useState<EditMsg>(editSource);
+    const [editMsg, setEditMsg] = useState<EditMsg>(editSource);
     //操作商户类型
     const [boxType, setBoxType] = useState<number>(1);
     //编辑商户信息
@@ -207,14 +207,16 @@ const MerchantList = (): ReactElement<ReactNode> => {
             key: 'id',
             align: 'center',
             width: 150,
-            render: (_, { id,name,email,mch_id }) => (
+            render: (_, { id, name, email, mch_id }) => (
                 <div className='list-oper'>
-                    <Button type='primary'>登录</Button>
+                    <Button type='primary' onClick={() => {
+                        autoLogin(mch_id);
+                    }}>登录</Button>
                     <div className='edit-merchant' onClick={() => {
                         setEditMsg({
-                            mch_id:mch_id,
-                            name:name,
-                            email:email
+                            mch_id: mch_id,
+                            name: name,
+                            email: email
                         });
                         setEditBox(true);
                     }}>
@@ -234,6 +236,16 @@ const MerchantList = (): ReactElement<ReactNode> => {
             )
         },
     ];
+    //自动登录
+    const autoLogin = (_mcn_id: string) => {
+        const features =
+            "height=800, width=1366, top=100, left=100, toolbar=no, menubar=no,scrollbars=no,resizable=no, location=no, status=no";
+        window.open(
+            `http://business.hlwzc.com/#/login?auto=${_mcn_id}`,
+            "NEW",
+            features
+        );
+    };
     return (
         <div className='merchant-list'>
             <div className='fitler-box'>
@@ -273,13 +285,13 @@ const MerchantList = (): ReactElement<ReactNode> => {
                 setAddbox(val);
             }} reloadList={() => {
                 dataListService()
-            }}/>
+            }} />
             {/* 编辑商户 */}
             <EditMerchantBox editMsg={editMsg} value={editBox} reloadList={() => {
                 dataListService()
             }} resetModal={() => {
                 setEditBox(false);
-            }}/>
+            }} />
         </div>
     );
 };

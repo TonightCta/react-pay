@@ -178,7 +178,7 @@ const BalanceCard = React.forwardRef((props,ref) => {
                                         }
                                     </div>
                                     <p className='balance-count'>{Number(item.count).toFixed(2)}&nbsp;{item.uint}</p>
-                                    <Popover placement="bottomLeft" content={<DetailContent list={item.detail} />} trigger="click">
+                                    <Popover placement="bottomLeft" content={<DetailContent list={item.detail} />} trigger="hover">
                                         <div className='balance-detail'>
                                             <p>币种明细</p>
                                             <img src={require('../../../assets/images/down_icon.png')} alt="" />

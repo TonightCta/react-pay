@@ -22,7 +22,8 @@ interface DataType {
     amount: number,
     created_at: string,
     comment: string,
-    link: string
+    link: string,
+    type:number
 }
 
 const columns: ColumnsType<DataType> = [
@@ -31,6 +32,15 @@ const columns: ColumnsType<DataType> = [
         dataIndex: 'mch_name',
         key: 'mch_name',
         align: 'center',
+    },
+    {
+        title: '类型',
+        dataIndex: 'type',
+        key: 'type',
+        align: 'center',
+        render:(_,{ type }) => (
+            <p>{type === 1 ? '利润结算' : '余额提取'}</p>
+        )
     },
     {
         title: '处理前后台余额',

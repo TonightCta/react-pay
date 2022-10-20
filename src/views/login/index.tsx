@@ -1,9 +1,9 @@
 
-import { Button, message } from 'antd';
+import { Button, message, Spin } from 'antd';
 import { ReactElement, ReactNode, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckEmail } from '../../utils';
-import { LoginApi, MerchantInfoApi, MerchantListApi, UpdatePassApi, SendCodeApi } from '../../request/api';
+import { CheckEmail, GetUrlKey } from '../../utils';
+import { LoginApi, MerchantInfoApi, MerchantListApi, UpdatePassApi, SendCodeApi, AutoLoginApi } from '../../request/api';
 import './index.scss';
 import { Type } from '../../utils/interface';
 import { IBPay } from '../../App';
@@ -58,6 +58,34 @@ const LoginIndex = (): ReactElement<ReactNode> => {
         setLoginMsg(sourceLogin)
         setForgetMsg(sourceForget)
     }, [showContent]);
+    //获取用户信息
+    const setUserInfo = async () => {
+        const info = await MerchantInfoApi({});
+        dispatch({
+            type: Type.SET_MERCHANT_ID,
+            payload: {
+                merchant_id: info.data.merchantInfo.mch_id
+            }
+        });
+        dispatch({
+            type: Type.SET_ACCOUNT,
+            payload: {
+                account: JSON.stringify(info.data)
+            }
+        });
+        const merchant = await MerchantListApi({
+            page: 1,
+            limit: 100
+        });
+        dispatch({
+            type: Type.SET_MERCHANT_LIST,
+            payload: {
+                merchant_list: merchant.data.list
+            }
+        });
+        setAuto(false);
+        navigate('/');
+    }
     //登录
     const loginService = async () => {
         if (!loginMsg.email) {
@@ -92,31 +120,8 @@ const LoginIndex = (): ReactElement<ReactNode> => {
                 token_new: `${data.token_type} ${data.access_token}`
             }
         });
-        sessionStorage.setItem('new_token', `${data.token_type} ${data.access_token}`)
-        const info = await MerchantInfoApi({});
-        dispatch({
-            type: Type.SET_MERCHANT_ID,
-            payload: {
-                merchant_id: info.data.merchantInfo.mch_id
-            }
-        });
-        dispatch({
-            type: Type.SET_ACCOUNT,
-            payload: {
-                account: JSON.stringify(info.data)
-            }
-        });
-        const merchant = await MerchantListApi({
-            page: 1,
-            limit: 100
-        });
-        dispatch({
-            type: Type.SET_MERCHANT_LIST,
-            payload: {
-                merchant_list: merchant.data.list
-            }
-        });
-        navigate('/');
+        sessionStorage.setItem('new_token', `${data.token_type} ${data.access_token}`);
+        setUserInfo();
     };
     //发送验证码
     const sendCodeService = async () => {
@@ -180,9 +185,38 @@ const LoginIndex = (): ReactElement<ReactNode> => {
         };
         message.success('密码重置成功');
         setShowContent(1);
+    };
+    //自动登录
+    const [auto, setAuto] = useState<boolean>(false);
+    const autoLogin = async (_id:string) => {
+        const result = await AutoLoginApi({
+            merchant_id:_id
+        });
+        const { code, data } = result;
+        if (code !== 200) {
+            message.error(result.message);
+            return;
+        };
+        dispatch({
+            type: Type.SET_NEW_TOKEN,
+            payload: {
+                token_new: `${data.token_type} ${data.access_token}`
+            }
+        });
+        sessionStorage.setItem('new_token', `${data.token_type} ${data.access_token}`)
+        setUserInfo();
     }
+    useEffect(() => {
+        if (GetUrlKey('auto', window.location.href)) {
+            setAuto(true);
+            autoLogin(GetUrlKey('auto', window.location.href) as string)
+        };
+    }, [])
     return (
         <div className='login-index'>
+            {auto && <div className='auto-login-loading'>
+                <Spin tip="登录中..." size='large'></Spin>
+            </div>}
             <div className='top-right-color'></div>
             <div className='bottom-right-color'></div>
             <div className='bottom-left-color'></div>
