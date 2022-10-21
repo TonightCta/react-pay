@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1290346",
+      "name": "Attention",
+      "font_class": "Attention",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "32391354",
+      "name": "TRX",
+      "font_class": "TRX1",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "32384722",
+      "name": "zhichu备份",
+      "font_class": "zhichubeifen",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "32384723",
+      "name": "wuxian-2",
+      "font_class": "wuxian-2",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "32384724",
+      "name": "zhichu",
+      "font_class": "zhichu",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "32384725",
+      "name": "wenhao",
+      "font_class": "wenhao1",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "32368279",
+      "name": "tuichu-6",
+      "font_class": "tuichu-6",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
       "icon_id": "32382872",
       "name": "earth-full",
       "font_class": "earth-full",

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const ScreenView = (): ReactElement<ReactNode> => {
     const navigate = useNavigate();
     return (
-        <div className='screen-view'>
+        <div className='screen-view' id='screen-view'>
             <img className='left-pic' src={require('../../../assets/images/site/screen_1.png')} alt="" />
             <img className='right-pic' src={require('../../../assets/images/site/screen_2.png')} alt="" />
             <div className='screen-inner'>

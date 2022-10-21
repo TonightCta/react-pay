@@ -29,6 +29,7 @@
           color: #4726cf;
           font-weight: 600;
           cursor: pointer;
+          white-space: nowrap;
         }
         li:last-child {
           margin-right: 44px;
@@ -45,13 +46,15 @@
       .select-language {
         display: flex;
         align-items: center;
-        .iconfont {
-          font-size: 24px;
-          cursor: pointer;
-          color: #4726cf;
-        }
-        .iconfont:first-child {
-          margin-right: 3px;
+        div {
+          .iconfont {
+            font-size: 24px;
+            cursor: pointer;
+            color: #4726cf;
+          }
+          .iconfont:first-child {
+            margin-right: 3px;
+          }
         }
       }
       .login-box {
@@ -81,7 +84,7 @@
   //   }
   .screen-view {
     width: 100%;
-    height: 798px;
+    height: 1052px;
     background: url("../../assets/images/site/screen.png");
     background-size: 100% 100%;
     position: relative;
@@ -154,6 +157,15 @@
         width: 310px;
         height: 310px;
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 70px;
+        p {
+          font-size: 34px;
+          color: #4a327d;
+          font-weight: 600;
+        }
         .top-line {
           position: absolute;
           width: 166px;
@@ -536,5 +548,29 @@
         rgba(74, 50, 125, 0)
       )
       2 2;
+  }
+}
+.select-language-popver {
+  ul {
+    li {
+      padding: 12px 24px;
+      cursor: pointer;
+      text-align: center;
+      border-bottom: 1px solid #f8f8f8;
+      display: flex;
+      align-items: center;
+      transition: 0.3s all;
+      img {
+        width: 18px;
+        height: 12px;
+        margin-right: 8px;
+      }
+    }
+    li:last-child {
+      border: 0;
+    }
+    li:hover {
+      background-color: #f8f8f8;
+    }
   }
 }

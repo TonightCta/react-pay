@@ -3,7 +3,7 @@ import { ReactElement, ReactNode } from 'react';
 
 const TeamView = (): ReactElement<ReactNode> => {
     return (
-        <div className='team-view'>
+        <div className='team-view' id='team-view'>
             <div className='frame-title'>
                 <p className='line-left line-public'></p>
                 <p className='text'>合作伙伴</p>

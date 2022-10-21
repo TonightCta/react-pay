@@ -3,6 +3,7 @@
 import { Context, IAction, State,Type } from "../utils/interface";
 
 export const defaultState : State = {
+    language:localStorage.getItem('language') || 'en',
     token_new:sessionStorage.getItem('new_token') || '',
     routeMsg:sessionStorage.getItem('routeMsg') || '',
     merchant_id:sessionStorage.getItem('merchant_id') || '',
@@ -21,8 +22,12 @@ export const defaultStateInit = (defaultState:State) => {
 }
 
 export const initState = (state:State,action:IAction) => {
+    console.log(action)
     const { type,payload } = action;
     switch(type){
+        case Type.SET_LANGUAGE:
+            localStorage.setItem('language',payload.language as string);
+            return { ...state,language:payload.language }
         case Type.SET_ROUTE_NAME:
             sessionStorage.setItem('routeMsg',payload.routeMsg as string);
             return { ...state,routeMsg:payload.routeMsg }

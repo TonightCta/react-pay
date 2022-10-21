@@ -4,7 +4,7 @@ import InnerTitle from './title';
 
 const PackageView = (): ReactElement<ReactNode> => {
     return (
-        <div className='package-view'>
+        <div className='package-view' id='package-view'>
             <InnerTitle title='套餐服务' />
             <img className='right-pic' src={require('../../../assets/images/site/package_right.png')} alt="" />
             <div className='package-inner'>

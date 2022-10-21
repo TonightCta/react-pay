@@ -38,7 +38,7 @@ const advListSecond: Adv[] = [
 
 const AdvView = (): ReactElement<ReactNode> => {
     return (
-        <div className='adv-view'>
+        <div className='adv-view' id="adv-view">
             <img className='left-icon' src={require('../../../assets/images/site/adv_left.png')} alt="" />
             <InnerTitle title='产品优势' />
             <div className='adv-inner'>

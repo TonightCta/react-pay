@@ -20,8 +20,8 @@ const App = (): ReactElement<ReactNode> => {
   return (
     <HashRouter>
       <div className="App">
-        <SiteNav/>
-        <IBPay.Provider value={{state,dispatch}}>
+        <IBPay.Provider value={{ state, dispatch }}>
+          <SiteNav />
           <RouterConfig />
         </IBPay.Provider>
       </div>

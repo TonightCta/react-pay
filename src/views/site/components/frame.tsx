@@ -33,7 +33,7 @@ const frameList : Frame[] = [
 
 const FrameView = () : ReactElement<ReactNode> => {
     return (
-        <div className='frame-view'>
+        <div className='frame-view' id="frame-view">
             <InnerTitle title='功能框架'/>
             <ul>
                 {

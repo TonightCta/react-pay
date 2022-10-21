@@ -1,0 +1,142 @@
+.development-index {
+  padding-top: 68px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  text-align: left;
+  .ant-spin{
+    transform: translateX(80px);
+  }
+  .doc_box {
+    width: 1250px;
+    display: flex;
+    box-sizing: border-box;
+    padding: 20px 0;
+    min-height: calc(100vh - 680px);
+    position: relative;
+    .list {
+      width: 180px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      z-index: 200;
+      top: 98px;
+      h2 {
+        box-sizing: border-box;
+        padding-bottom: 20px;
+        font-size: 22px;
+      }
+      a {
+        text-decoration: none;
+        color: #4726cf;
+        margin-left: 10px;
+        line-height: 35px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      /*正常的未被访问过的链接*/
+      a:link {
+        text-decoration: none;
+      }
+      /*已经访问过的链接*/
+      a:visited {
+        text-decoration: none;
+      }
+      /*鼠标划过(停留)的链接*/
+      a:hover {
+        text-decoration: none;
+      }
+      /* 正在点击的链接*/
+      a:active {
+        text-decoration: none;
+      }
+    }
+    .fixed {
+      position: fixed;
+      top: 90px;
+    }
+    .doc {
+      width: 1250px;
+      box-sizing: border-box;
+      padding: 0 10px 0 180px;
+      font-size: 16px;
+      p {
+        padding: 10px 0;
+      }
+      pre {
+        box-sizing: border-box;
+        padding: 15px;
+        border-radius: 10px;
+        background: #1c1d21;
+        color: #c0c5ce;
+        font-size: 13px;
+        line-height: 20px;
+      }
+      a {
+        text-decoration: none;
+        color: #3054eb;
+        margin-left: 10px;
+        line-height: 35px;
+      }
+      /*正常的未被访问过的链接*/
+      a:link {
+        text-decoration: none;
+      }
+      /*已经访问过的链接*/
+      a:visited {
+        text-decoration: none;
+      }
+      /*鼠标划过(停留)的链接*/
+      a:hover {
+        text-decoration: none;
+      }
+      /* 正在点击的链接*/
+      a:active {
+        text-decoration: none;
+      }
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 30px 0;
+        font-weight: 500;
+      }
+      h5{
+        font-size: 14px;
+      }
+      h6{
+        font-size: 12px;
+      }
+      table {
+        margin-bottom: 30px;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+        border-radius: 2px;
+        border-collapse: collapse;
+        font-size: 14px;
+        font-weight: 400;
+      }
+      table thead th {
+        text-align: center;
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.5);
+        min-width: 90px;
+      }
+      table td,
+      table th {
+        padding: 10px 15px;
+      }
+      table tr {
+        &:nth-child(2n) {
+          background-color: #eee;
+        }
+      }
+    }
+  }
+  .bottom {
+    width: 100%;
+    background-color: #0b1021;
+  }
+}

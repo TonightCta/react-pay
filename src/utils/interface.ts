@@ -1,5 +1,6 @@
 
 export interface State{
+    language?:string,
     routeMsg?:string,
     token_new?:string,
     merchant_id?:string,
@@ -9,6 +10,7 @@ export interface State{
 }
 
 export enum Type{
+    SET_LANGUAGE = 'set_language',
     SET_ROUTE_NAME = 'set_route_name',
     SET_NEW_TOKEN = 'set_new_token',
     SET_MERCHANT_ID = 'set_merchant_id',
