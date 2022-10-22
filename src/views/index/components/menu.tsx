@@ -359,7 +359,7 @@ const Menu = (props: { menuStatus: number }): ReactElement<ReactNode> => {
                 <div className='bottom-content content-public'>
                     <ul>
                         <li onClick={() => {
-                            window.open('https://ib.cc/#/Doc?lang=zh-CN');
+                            window.open('http://www.hlwzc.com/#/development');
                         }}>
 
                             <p className='iconfont icon-a-fuzhi-23'></p>

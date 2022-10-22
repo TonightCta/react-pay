@@ -48,7 +48,7 @@ const SiteNav = (): ReactElement<ReactNode> => {
         }
     };
     //切换语言
-    const setLanguage = (_key:string) => {
+    const setLanguage = (_key: string) => {
         dispatch({
             type: Type.SET_LANGUAGE,
             payload: {
@@ -106,21 +106,26 @@ const SiteNav = (): ReactElement<ReactNode> => {
                         <p>{t('public.home')}</p>
                     </li>
                     <li onClick={() => { slideTo('frame-view') }}>
-                        <p>功能框架</p>
+                        {/* 功能框架 */}
+                        <p>{t('public.frame')}</p>
                     </li>
                     <li onClick={() => { slideTo('adv-view') }}>
-                        <p>产品优势</p>
+                        {/* 产品优势 */}
+                        <p>{t('public.adv')}</p>
                     </li>
                     <li onClick={() => { slideTo('package-view') }}>
-                        <p>套餐服务</p>
+                        {/* 套餐服务 */}
+                        <p>{t('public.package')}</p>
                     </li>
                     <li onClick={() => { slideTo('team-view') }}>
-                        <p>合作伙伴</p>
+                        {/* 合作伙伴 */}
+                        <p>{t('public.team')}</p>
                     </li>
                     <li onClick={() => {
                         navigate('/development')
                     }}>
-                        <p>开发者中心</p>
+                        {/* 开发者中心 */}
+                        <p>{t('public.development')}</p>
                     </li>
                 </ul>
                 <div className='select-language'>
@@ -133,7 +138,12 @@ const SiteNav = (): ReactElement<ReactNode> => {
                 </div>
                 <div className='login-box'>
                     <p className='iconfont icon-a-earth-full1'></p>
-                    <p>登录</p>
+                    <p>
+                        {/* 登录 */}
+                        <p onClick={() => {
+                            window.open('http://business.hlwzc.com/#/login');
+                        }}>{t('public.login')}</p>
+                    </p>
                 </div>
             </div>
         </div>

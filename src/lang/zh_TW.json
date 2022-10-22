@@ -1,5 +1,61 @@
 {
-    "public":{
-        "home":"首頁"
+    "public": {
+        "home": "首頁",
+        "frame": "功能框架",
+        "adv": "產品優勢",
+        "package": "套餐服務",
+        "team": "合作夥伴",
+        "development": "開發者中心",
+        "login": "登錄",
+        "screen_title": "快速集成加密貨幣支付到您的網站或APP",
+        "contact_us": "聯繫我們",
+        "user": "用戶",
+        "pay": "支付",
+        "merchant": "商家",
+        "chain": "區塊鏈",
+        "list":"目錄"
+    },
+    "frame": {
+        "remark_title_1": "保護隱私",
+        "remark_1": "加密貨幣為客戶和商人提供最高的隱私和安全性。",
+        "remark_title_2": "全球化",
+        "remark_2": "使用無邊界的加密支付，全球範圍內都可以運營您的業務，突破地域和國界限制。",
+        "remark_title_3": "接入便捷",
+        "remark_3": "成熟接口方案5個工作日即可對接完成，豐富對接開發經驗助力客戶最快佔領市場。",
+        "remark_4": "支持多幣種流通",
+        "remark_title_4": "多幣種流通，跨境支付也輕鬆。",
+        "remark_5": "DO高效結算",
+        "remark_title_5": "DO高效清結算，省去雜冗流程，鏈上結算更及時。",
+        "remark_6": "超低手續費",
+        "remark_title_6": "使用HLWZC.COM支付平台，可以在全球範圍內都享超低手續費。"
+    },
+    "package": {
+        "month": "月套餐",
+        "flexible":"靈活套餐",
+        "coin_type": "幣種類型",
+        "address_amount": "地址數量",
+        "fee": "套餐收費",
+        "no_limit":"無限制",
+        "in": "進",
+        "out": "出"
+    },
+    "team": {
+        "remark_1": "目前已有1369+全球合作夥伴",
+        "remark_2": "選擇HLWZC.COM支付",
+        "user": "服務用戶",
+        "merchant": "服務商戶"
+    },
+    "footer": {
+        "remark": "一個覆蓋全球的幣支付平台，致力於解決企業全球收款問題，為企業提供安全、便捷、保護隱私的區塊鏈在線支付服務，企業可通過支付平台選擇穩定幣、比特幣以及其他代幣在全球範圍內完成收款和支付，更容易把業務拓展全球，實現全球化。",
+        "copy": "版權所有"
+    },
+    "demo": {
+        "title": "您可以在這體驗充值流程",
+        "customer": "諮詢客服接入支付",
+        "buy_side":"購買加密貨幣",
+        "change":"變更",
+        "recharge_remark":"發送任何除{{coin}}之外的貨幣至這一地址都會造成永久的充幣損失。",
+        "copy":"複製成功",
+        "down_limit":"最低限額"
     }
 }

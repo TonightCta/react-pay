@@ -17,7 +17,7 @@
     min-height: calc(100vh - 680px);
     position: relative;
     .list {
-      width: 180px;
+      width: 200px;
       display: flex;
       flex-direction: column;
       position: fixed;
@@ -27,6 +27,10 @@
         box-sizing: border-box;
         padding-bottom: 20px;
         font-size: 22px;
+      }
+      div{
+        display: flex;
+        flex-direction: column;
       }
       a {
         text-decoration: none;
