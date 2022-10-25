@@ -9,7 +9,7 @@ const RouterConfig = (): ReactElement => {
     const { account } = state;
     return (
         <Routes>
-            {/* <Route path="/" element={<View.IndexView />}>
+            <Route path="/" element={<View.IndexView />}>
                 <Route index element={<View.OverviewIndex />} />
                 <Route path="/order" element={<View.OrderIndex />}>
                     <Route index element={<View.UserDepositList />} />
@@ -32,10 +32,10 @@ const RouterConfig = (): ReactElement => {
                         <Route index element={<View.MerchantInformation />} />
                     </Route>}
             </Route>
-            <Route path="/login" element={<View.LoginIndex />} /> */}
-            <Route path="/" element={<View.SiteIndex/>}></Route>
+            <Route path="/login" element={<View.LoginIndex />} />
+            {/* <Route path="/" element={<View.SiteIndex/>}></Route>
             <Route path="/demo" element={<View.DemoIndex/>}></Route>
-            <Route path="/development" element={<View.DevelopmentIndex />}></Route>
+            <Route path="/development" element={<View.DevelopmentIndex />}></Route> */}
         </Routes>
     )
 };

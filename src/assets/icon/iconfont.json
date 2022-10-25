@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "32487016",
+      "name": "shiyongjiaocheng",
+      "font_class": "shiyongjiaocheng",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    },
+    {
       "icon_id": "1290346",
       "name": "Attention",
       "font_class": "Attention",
