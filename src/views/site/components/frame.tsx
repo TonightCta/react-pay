@@ -28,11 +28,11 @@ const FrameView = (): ReactElement<ReactNode> => {
         {
             img: require('../../../assets/images/site/frame_3.png'),
             topLine: require('../../../assets/images/site/frame_line_1.png'),
-            name: t('public.merchant'),//商家
+            name: t('public.chain'),//区块链
         },
         {
             img: require('../../../assets/images/site/frame_4.png'),
-            name: t('public.chain'),//区块链
+            name: t('public.merchant'),//商家
         }
     ]
     return (

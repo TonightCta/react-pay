@@ -27,7 +27,7 @@
         "remark_5": "DO高效結算",
         "remark_title_5": "DO高效清結算，省去雜冗流程，鏈上結算更及時。",
         "remark_6": "超低手續費",
-        "remark_title_6": "使用HLWZC.COM支付平台，可以在全球範圍內都享超低手續費。"
+        "remark_title_6": "使用HLWZC支付平台，可以在全球範圍內都享超低手續費。"
     },
     "package": {
         "month": "月套餐",
@@ -41,7 +41,7 @@
     },
     "team": {
         "remark_1": "目前已有1369+全球合作夥伴",
-        "remark_2": "選擇HLWZC.COM支付",
+        "remark_2": "選擇HLWZC支付",
         "user": "服務用戶",
         "merchant": "服務商戶"
     },
@@ -57,5 +57,10 @@
         "recharge_remark":"發送任何除{{coin}}之外的貨幣至這一地址都會造成永久的充幣損失。",
         "copy":"複製成功",
         "down_limit":"最低限額"
+    },
+    "development": {
+        "name": "開發者中心",
+        "name_2": "為開發者提供網關接口、SDK下載等一站式接入服務",
+        "table":"目錄"
     }
 }

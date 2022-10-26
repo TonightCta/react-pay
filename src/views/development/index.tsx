@@ -9,12 +9,24 @@ import { Spin } from 'antd';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { IBPay } from '../../App';
+import { useTranslation } from 'react-i18next';
 
 const DevelopmentIndex = (): ReactElement<ReactNode> => {
     const mdRender = useRef<HTMLDivElement>(null!);
     const { state } = useContext(IBPay);
     const { language } = state;
     const [loading, setLoading] = useState<boolean>(true);
+    const [isFixed, setIsFixed] = useState<boolean>(false);
+    const handleScroll = () => {
+        setIsFixed(window.scrollY > 490 ? true : false)
+    }
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, true);
+        return () => {
+            window.removeEventListener('scroll', handleScroll, true);
+        }
+    }, []);
+    const { t } = useTranslation();
     const initMD = () => {
         const renderMD = new marked.Renderer();
         marked.setOptions({
@@ -34,7 +46,7 @@ const DevelopmentIndex = (): ReactElement<ReactNode> => {
             mdRender.current.innerHTML = info;
             setLoading(false);
         });
-    }
+    };
     useEffect(() => {
         initMD()
     }, [language]);
@@ -42,16 +54,30 @@ const DevelopmentIndex = (): ReactElement<ReactNode> => {
         const el = document.getElementById(_id);
         if (el) {
             window.scrollTo({
-                top: el.offsetTop - 20,
+                top: el.offsetTop + 530,
                 behavior: "smooth",
             });
         }
     }
     return (
         <div className='development-index'>
+            <div className='deve-banner'>
+                {/* <img src={require('../../assets/images/site/deve_bg.png')} alt="" /> */}
+                <p>
+                    {/* 开发者中心 */}
+                    {t('development.name')}
+                </p>
+                <p>
+                    {/* 为开发者提供网关接口、SDK下载等一站式接入服务 */}
+                    {t('development.name_2')}
+                </p>
+            </div>
             <div className='doc_box'>
-                <div className="list">
-                    <h2>目录</h2>
+                <div className={`list ${isFixed ? 'fixed-list' : ''}`}>
+                    <h2>
+                        {/* 目录 */}
+                        {t('development.table')}
+                    </h2>
                     {language === 'zh_CN' && <div>
                         <a onClick={() => {
                             slideTo('1、生成地址')
@@ -123,7 +149,7 @@ const DevelopmentIndex = (): ReactElement<ReactNode> => {
                     </div>}
                 </div >
                 <Spin size='large' spinning={loading}>
-                    <div id="doc_html" className="doc" ref={mdRender}></div>
+                    <div id="doc_html" className={`doc ${isFixed ? 'need-left' : ''}`} ref={mdRender}></div>
                 </Spin>
             </div >
         </div >

@@ -5,14 +5,14 @@ import { useTranslation } from 'react-i18next';
 
 
 const coin: { logo: string, name: string }[] = [
-    { logo: require('../../../assets/images/coin/btc.png'), name: 'BTC' },
-    { logo: require('../../../assets/images/coin/bth.png'), name: 'BTH' },
-    { logo: require('../../../assets/images/coin/eth.png'), name: 'ETC' },
-    { logo: require('../../../assets/images/coin/usdt.png'), name: 'USDT' },
-    { logo: require('../../../assets/images/coin/trx.png'), name: 'TRX' },
-    { logo: require('../../../assets/images/coin/xrp.png'), name: 'XRP' },
-    { logo: require('../../../assets/images/coin/eos.png'), name: 'EOS' },
-    { logo: require('../../../assets/images/coin/ltc.png'), name: 'LTC' },
+    { logo: require('../../../assets/images/site/footer/btc.png'), name: 'BTC' },
+    { logo: require('../../../assets/images/site/footer/bth.png'), name: 'BTH' },
+    { logo: require('../../../assets/images/site/footer/eth.png'), name: 'ETH' },
+    { logo: require('../../../assets/images/site/footer/usdt.png'), name: 'USDT' },
+    { logo: require('../../../assets/images/site/footer/trx.png'), name: 'TRX' },
+    { logo: require('../../../assets/images/site/footer/doge.png'), name: 'DOGE' },
+    { logo: require('../../../assets/images/site/footer/eos.png'), name: 'EOS' },
+    { logo: require('../../../assets/images/site/footer/ltc.png'), name: 'LTC' },
 ]
 
 const FooterNav = (): ReactElement<ReactNode> => {

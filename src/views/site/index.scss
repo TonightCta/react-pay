@@ -106,7 +106,12 @@
       width: 1200px;
       margin: 0 auto;
       text-align: left;
-      padding-top: 256px;
+      // padding-top: 256px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100%;
       .text-img {
         width: 700px;
         height: 185px;
@@ -297,10 +302,11 @@
             display: flex;
             background: #eee9ff;
             border-radius: 4px;
-            padding: 20px 45px 24px 50px;
+            padding: 20px 45px 20px 50px;
             max-width: 640px;
             margin-top: 30px;
             height: 108px;
+            align-items: center;
             div {
               p:first-child {
                 font-size: 20px;
@@ -383,6 +389,7 @@
               height: 30px;
               background-color: rgba(154, 130, 255, 0.3);
               margin-right: 70px;
+              transform: translateY(10px);
             }
             .pack-address::after {
               content: "";
@@ -391,6 +398,7 @@
               height: 30px;
               background-color: rgba(154, 130, 255, 0.3);
               margin-left: 70px;
+              transform: translateY(10px);
             }
           }
           .pack-inner-en{

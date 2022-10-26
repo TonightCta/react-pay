@@ -26,16 +26,16 @@ const AdvView = (): ReactElement<ReactNode> => {
     ];
     const advListSecond: Adv[] = [
         {
-            name: t('frame.remark_title_4'),//支持多币种流通
-            text: t('frame.remark_4'),//多币种流通，跨境支付也轻松。
+            name: t('frame.remark_4'),//支持多币种流通
+            text: t('frame.remark_title_4'),//多币种流通，跨境支付也轻松。
         },
         {
-            name: t('frame.remark_title_5'),//DO高效结算
-            text: t('frame.remark_5'),//DO高效清结算，省去杂冗流程，链上结算更及时。
+            name: t('frame.remark_5'),//DO高效结算
+            text: t('frame.remark_title_5'),//DO高效清结算，省去杂冗流程，链上结算更及时。
         },
         {
-            name: t('frame.remark_title_6'),//超低手续费
-            text: t('frame.remark_6'),//COM支付平台，可以在全球范围内都享超低手续费。
+            name: t('frame.remark_6'),//超低手续费
+            text: t('frame.remark_title_6'),//COM支付平台，可以在全球范围内都享超低手续费。
         },
     ];
     return (

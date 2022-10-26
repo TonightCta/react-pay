@@ -13,7 +13,7 @@
         "pay": "Pay",
         "merchant": "Merchant",
         "chain": "Blockchain",
-        "list":"Table of contents"
+        "list": "Table of contents"
     },
     "frame": {
         "remark_title_1": "Privacy Protection",
@@ -27,21 +27,21 @@
         "remark_5": "DO efficient settlement",
         "remark_title_5": "DO efficiently clears and settles, saves complicated processes, and makes on-chain settlement more timely.",
         "remark_6": "Ultra-low handling fee",
-        "remark_title_6": "Using the HLWZC.COM payment platform, you can enjoy ultra-low handling fees worldwide."
+        "remark_title_6": "Using the HLWZC payment platform, you can enjoy ultra-low handling fees worldwide."
     },
     "package": {
         "month": "Monthly",
         "coin_type": "Coin Type",
-        "flexible":"Flexible",
+        "flexible": "Flexible",
         "address_amount": "Address Amount",
         "fee": "Package fee",
-        "no_limit":"Unlimited",
+        "no_limit": "Unlimited",
         "in": "Deposit",
         "out": "Withdraw"
     },
     "team": {
         "remark_1": "Currently there are 1369+ global partners",
-        "remark_2": "Select HLWZC.COM to pay",
+        "remark_2": "Select HLWZC to pay",
         "user": "Service User",
         "merchant": "Service Merchant"
     },
@@ -52,10 +52,15 @@
     "demo": {
         "title": "You can experience the recharge process here",
         "customer": "Consult customer service access payment",
-        "buy_side":"Buy cryptocurrency",
-        "change":"Change",
-        "recharge_remark":"Sending any currency other than {{value}} to this address will result in a permanent deposit loss.",
-        "copy":"Copy successfully",
-        "down_limit":"Minimum"
+        "buy_side": "Buy cryptocurrency",
+        "change": "Change",
+        "recharge_remark": "Sending any currency other than {{value}} to this address will result in a permanent deposit loss.",
+        "copy": "Copy successfully",
+        "down_limit": "Minimum"
+    },
+    "development": {
+        "name": "Developer Center",
+        "name_2": "Provide developers with one-stop access services such as gateway interface and SDK download",
+        "table":"Table of contents"
     }
 }
