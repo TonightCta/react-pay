@@ -32,12 +32,12 @@ const MerchantDeposit = (): ReactElement<ReactNode> => {
             }));
         }
         setAddress({
-            recharge: coins[_index ? _index : 0].merchantDepositAddress,
-            fee: feeCoins[_index ? _index : 0].merchantDepositAddress
+            recharge:coins.length > 0 ?  coins[_index ? _index : 0].merchantDepositAddress : 'No address',
+            fee: feeCoins.length > 0 ? feeCoins[_index ? _index : 0].merchantDepositAddress : 'No address'
         });
         setBalance({
-            recharge: coins[_index ? _index : 0].mchFeeAvailable,
-            fee: feeCoins[_index ? _index : 0].userFeeAvailable
+            recharge:coins.length > 0 ? coins[_index ? _index : 0].mchFeeAvailable : '0',
+            fee:feeCoins.length > 0 ? feeCoins[_index ? _index : 0].userFeeAvailable : '0'
         })
     }
     useEffect(() => {

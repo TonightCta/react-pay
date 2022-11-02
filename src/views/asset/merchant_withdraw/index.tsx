@@ -75,6 +75,9 @@ const MerchantWithdraw = (): ReactElement<ReactNode> => {
                 return item.asset
             }));
         };
+        if(coins.length < 1){
+            return
+        }
         setBalance({
             ...balance,
             withdrawMinerFee: coins[_index ? _index : 0].withdrawMinerFee,
