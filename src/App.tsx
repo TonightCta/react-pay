@@ -8,7 +8,7 @@ import { defaultState } from './reducer/index';
 import 'element-theme-default';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import SiteNav from './views/site/components/nav';
+// import SiteNav from './views/site/components/nav';
 import { useEffect } from 'react';
 moment.locale('zh-cn');
 

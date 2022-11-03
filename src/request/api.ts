@@ -76,3 +76,5 @@ export const CheckBalanceApi = (p:o) => post('/manager/beforeCheckoutBalance',p)
 export const ClearBalanceApi = (p:o) => post('/manager/checkoutBalance',p);
 //自动登录
 export const AutoLoginApi = (p:o) => post('/user/login/v2/loginUserToken',p);
+//法币通道列表
+export const AisleListApi = (p:o) => post('/fait/getChannels',p);

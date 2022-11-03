@@ -284,7 +284,7 @@ const Menu = (props: { menuStatus: number }): ReactElement<ReactNode> => {
             const route: RouteMine[] = sourceRoute;
             route[route.length - 1].children = [{
                 name: '商家信息',
-                url: '/account/merchant-information'
+                url: '/account'
             }];
             setRoute([...route]);
         }

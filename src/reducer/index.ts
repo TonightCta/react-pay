@@ -22,7 +22,6 @@ export const defaultStateInit = (defaultState:State) => {
 }
 
 export const initState = (state:State,action:IAction) => {
-    console.log(action)
     const { type,payload } = action;
     switch(type){
         case Type.SET_LANGUAGE:

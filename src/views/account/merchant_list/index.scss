@@ -157,8 +157,40 @@
 }
 
 .add-merchant-content {
+  .select-coin-type {
+    margin-top: 10px;
+    ul {
+      display: flex;
+      justify-content: center;
+      li {
+        width: 190px;
+        height: 34px;
+        font-size: 18px;
+        color: #999;
+        text-align: center;
+        border: 1px solid #e6e6e6;
+        transition: 0.2s all;
+        cursor: pointer;
+        line-height: 34px;
+      }
+      li:first-child {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+      li:last-child {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+      .active-type {
+        border: 0;
+        background-color: #6848fd;
+        color: white;
+        border-radius: 4px;
+      }
+    }
+  }
   .add-inp {
-    padding: 32px 30px 40px;
+    padding: 26px 30px 40px;
     ul {
       display: flex;
       flex-wrap: wrap;
@@ -170,7 +202,7 @@
         align-items: center;
         position: relative;
         .inner-label {
-          width: 60px;
+          width: 80px;
         }
         .oper-type {
           top: 10px;
@@ -184,11 +216,53 @@
         }
       }
     }
+    .in-out{
+      margin-top: 20px;
+    }
     .select-wallet {
       display: flex;
       margin-top: 8px;
-      .inner-label {
-        width: 60px;
+      align-items: center;
+      .inner-label{
+        width: 80px;
+        min-width: 80px;
+      }
+      .ant-select {
+        .ant-select-selector {
+          height: 44px;
+          align-items: center;
+          border-radius: 4px;
+          background-color: #faf8ff;
+          border-color: rgba(104, 72, 253, 0.2);
+          // .ant-select-selection-overflow-item {
+          //   .ant-select-selection-item {
+          //     margin-right: 12px;
+          //     background-color: #f0ecfe;
+          //     border-radius: 4px;
+          //     color: #6848FD;
+          //     font-weight: 500;
+          //     position: relative;
+          //     .ant-select-selection-item-remove{
+          //       font-size: 12px;
+          //       width: 12px;
+          //       height: 12px;
+          //       background: #AC9AFF;
+          //       border-radius: 50%;
+          //       display: flex;
+          //       align-items: center;
+          //       justify-content: center;
+          //       transform: translateY(5px);
+          //       margin-left: 6px;
+          //       padding-top: 2px;
+          //       .anticon-close{
+          //         font-size: 12px;
+          //         transform: scale(.7);
+          //         color: white;
+          //       }
+          //     }
+          //   }
+          // }
+        }
       }
       .ant-radio-wrapper {
         margin-right: 46px;
@@ -197,8 +271,14 @@
         }
       }
     }
+    .select-aisle{
+      margin-top: 0;
+    }
+    .select-bank {
+      margin-top: 20px;
+    }
     .enter-address {
-      margin-top: 34px;
+      margin-top: 28px;
       align-items: center;
       input {
         flex: 1;
@@ -230,7 +310,7 @@
       border-color: rgba(104, 72, 253, 0.2);
     }
   }
-  .edit-inp:last-child{
+  .edit-inp:last-child {
     margin-bottom: 0;
   }
 }

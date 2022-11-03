@@ -16,9 +16,6 @@ const ViewTool = (props: Props): ReactElement<ReactNode> => {
     const [visible,setVisible] = useState<boolean>(false);
     const [tuType,setTuType] = useState<number>(1);
     const location = useLocation();
-    useEffect(() => {
-        console.log(location)
-    },[])
     return (
         <div className='view-tool'>
             <div className='left-oper'>
